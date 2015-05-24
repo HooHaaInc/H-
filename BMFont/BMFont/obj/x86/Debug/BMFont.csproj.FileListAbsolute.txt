@@ -1,0 +1,5 @@
+C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\BMFont\BMFont\bin\x86\Debug\BMFont.exe
+C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\BMFont\BMFont\bin\x86\Debug\BMFont.pdb
+C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\BMFont\BMFont\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\BMFont\BMFont\obj\x86\Debug\BMFont.exe
+C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\BMFont\BMFont\obj\x86\Debug\BMFont.pdb

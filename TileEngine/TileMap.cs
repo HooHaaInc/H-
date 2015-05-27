@@ -23,6 +23,7 @@ namespace TileEngine
 		static private int[,] foreground;
 		public static BitFont spriteFont;
 		static private Texture2D tileSheet;
+		static private int drugoidal = 0;
 		static public bool OnDrugs = false;
 		#endregion
 
@@ -39,19 +40,7 @@ namespace TileEngine
 			background = new int[MapWidth+width/TileSize, MapHeight + height/TileSize];
 			foreground = new int[MapWidth-width/(TileSize*3), MapHeight - height/(TileSize*3)];
 
-			for(int x=0; x<ForegroundWidth; ++x)
-				for(int y=0; y<ForegroundHeight; ++y)
-					foreground [x, y] = 0;
-
-			for(int x=0; x<MapWidth; ++x)
-				for(int y=0; y<MapHeight; ++y)
-					mapCells [x, y] = new MapSquare (0, 0, 0, "", 0);
-
-			for(int x=0; x<BackgroundWidth; ++x)
-				for(int y=0; y<BackgroundHeight; ++y)
-					background [x, y] = defaultBackground;
-
-
+			ClearMap ();
 
 		}
 		#endregion
@@ -59,7 +48,7 @@ namespace TileEngine
 		#region Simple TileEngining
 
 		/// <summary>
-		/// 	Size Layers son background, mapsquare y foreground (las de tamaño distinto)
+		/// 	Los Size Layers son background, mapsquare y foreground (las de tamaño distinto)
 		/// 	[background, mapsquare, foreground]
 		/// </summary>
 		/// <returns>The size layer.</returns>
@@ -68,6 +57,8 @@ namespace TileEngine
 		/// 	[background, interactive, clean, drugged, foreground]
 		/// </param>
 		static public int GetSizeLayer(int allLayers){
+			if (allLayers > 4)
+				return 1;
 			return (allLayers + 2) / 3;
 		}
 
@@ -164,7 +155,7 @@ namespace TileEngine
 
 		static public bool MapSquareIsPassable(int cellX, int cellY){
 			MapSquare square = GetMapSquareAtCell (cellX, cellY);
-			return square != null && square.IsPassable ();
+			return square == null || square.IsPassable ();
 		}
 
 		static public bool MapSquareIsPassable(Vector2 cell){
@@ -214,6 +205,20 @@ namespace TileEngine
 				GetColumnByPixelX (x, 1),
 				GetRowByPixelY (y, 1));
 		}
+
+		static public bool isRectanglePassable(Rectangle rect){
+			Rectangle indexes = new Rectangle (
+				GetColumnByPixelX (rect.X),
+				GetRowByPixelY (rect.Y),
+				GetColumnByPixelX (rect.X + rect.Width -1),
+				GetRowByPixelY (rect.Y + rect.Height -1)
+				);
+			for (int x = indexes.X; x <= indexes.Width; ++x)
+				for (int y = indexes.Y; y<=indexes.Height; ++y)
+					if (GetMapSquareAtCell (x,y).Passable == (OnDrugs ? 1 : 2))
+						return false;
+			return true;
+		}
 		#endregion
 
 
@@ -241,16 +246,20 @@ namespace TileEngine
 			endX = GetColumnByPixelX ((int)Camera.Position.X/2 + Camera.ViewPortWidth, 0);
 			startY = GetRowByPixelY ((int)Camera.Position.Y/2, 0);
 			endY = GetRowByPixelY ((int)Camera.Position.Y/2 + Camera.ViewPortHeight, 0);
-			for (int x = startX; x <= endX; x++)
+			++drugoidal;
+			Rectangle screenRectangle;
+			for (int x = startX; x <= endX; x++){
 				for (int y = startY; y <= endY; y++) {
+					screenRectangle = CellScreenRectangle (x, y, 0);
 					if (x < 0 || y < 0 || x >= BackgroundWidth || y >= BackgroundHeight)
 						continue;
 					spriteBatch.Draw (
 						tileSheet, 
-						CellScreenRectangle (x, y, 0), 
-						TileSourceRectangle (background[x, y]),
-						Color.White
+						screenRectangle, 
+						TileSourceRectangle (background [x, y]),
+						OnDrugs ? new Color (drugoidal % 256, (drugoidal + 85) % 256, (drugoidal + 170) % 256) : Color.White
 					); 
+				}
 			}
 			startX = GetColumnByPixelX ((int)Camera.Position.X, 1);
 			endX = GetColumnByPixelX ((int)Camera.Position.X + Camera.ViewPortWidth, 1);
@@ -259,12 +268,13 @@ namespace TileEngine
 			for (int x = startX; x <= endX; x++)
 				for (int y = startY; y <= endY; y++) {
 					for (int z = 0; z<MapLayers; ++z) {
+						screenRectangle = CellScreenRectangle (x, y, 1);
 						if (x < 0 || y < 0 || x >= MapWidth || y >= MapHeight ||
 					    mapCells[x,y].ToDraw()==0)
 							continue;
 						spriteBatch.Draw (
 							tileSheet, 
-							CellScreenRectangle (x, y, 1), 
+							screenRectangle, 
 							TileSourceRectangle (mapCells [x, y].ToDraw ()),
 							Color.White
 						);
@@ -280,7 +290,8 @@ namespace TileEngine
 				int endY = GetRowByPixelY ((int)Camera.Position.Y/2*3 + Camera.ViewPortHeight, 2);
 				for (int x = startX; x <= endX; x++)
 					for (int y = startY; y <= endY; y++) {
-					if (x < 0 || y < 0 || x >= foreground.GetLength (0) || y >= foreground.GetLength (1) || foreground[x,y]==0)
+					if (x < 0 || y < 0 || x >= ForegroundWidth || y >= ForegroundHeight || 
+				    GetForegroundAtCell (x,y) <=0 )
 						continue;
 					spriteBatch.Draw (
 						tileSheet, 
@@ -290,7 +301,6 @@ namespace TileEngine
 						); 
 				}
 			}
-
 
 		#endregion
 
@@ -349,7 +359,7 @@ namespace TileEngine
 
 			for (int x = 0; x < BackgroundWidth; x++)
 				for (int y = 0; y < BackgroundHeight; y++)
-					background[x, y] = 0;
+					background [x, y] = defaultBackground;
 
 			for (int x = 0; x < ForegroundWidth; x++)
 				for (int y = 0; y < ForegroundHeight; y++)

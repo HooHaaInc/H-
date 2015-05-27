@@ -76,7 +76,7 @@ namespace TileEngine
 		}
 
 		public bool IsPassable(){
-			switch(Passable){
+			/*switch(Passable){
 				case 0:
 				return true;
 				///break;
@@ -87,7 +87,8 @@ namespace TileEngine
 				return TileMap.OnDrugs;
 				//break;
 			}
-			return false;
+			return false;*/
+			return ((TileMap.OnDrugs ? 1: 2) & Passable) == 0;
 		}
 
 		public bool IsPassable(int maplayer){

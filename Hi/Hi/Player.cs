@@ -14,7 +14,6 @@ namespace Hi
     {
         private Vector2 fallSpeed = new Vector2(0, 15);
         private float moveScale = 180.0f;
-        private Vector2 lastMove;
         private bool dead = false;
         public int drugCount = 0;
         private int score = 0;
@@ -22,6 +21,7 @@ namespace Hi
         public int inyecciones = 5;
         KeyboardState lastState;
         public bool paused = false;
+		private Vector2 safePosition;
 
         public bool Dead
         {
@@ -90,36 +90,28 @@ namespace Hi
         public override void Update(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
-            //if (keyState.IsKeyDown(Keys.Escape) && lastState.IsKeyUp(Keys.Escape) ) paused = !paused;
-          //  if (paused)
-            {
-            //    lastState = keyState;
-           //     return;
-            }
+
             if (!Dead)
             {
                 string newAnimation = "idle";
 
                 velocity = new Vector2(0, velocity.Y);
                 GamePadState gamePad = GamePad.GetState(PlayerIndex.One);
-                if (keyState.IsKeyDown(Keys.Q) && lastState.IsKeyUp(Keys.Q)) Clean();
+                if (keyState.IsKeyDown(Keys.Q) && lastState.IsKeyUp(Keys.Q))
+					Clean();
                 if (keyState.IsKeyDown(Keys.Left) ||
                     keyState.IsKeyDown(Keys.A))
                 {
                     flipped = false;
                     newAnimation = "run";
                     velocity = new Vector2(-moveScale, velocity.Y);
-                }
-
-                if (keyState.IsKeyDown(Keys.Right) ||
+                } if (keyState.IsKeyDown(Keys.Right) ||
                     keyState.IsKeyDown(Keys.D))
                 {
                     flipped = true;
                     newAnimation = "run";
                     velocity = new Vector2(moveScale, velocity.Y);
-                }
-
-                if (keyState.IsKeyDown(Keys.Space) ||
+                } if (keyState.IsKeyDown(Keys.Space) ||
                     (gamePad.Buttons.A == ButtonState.Pressed))
                 {
                     if (onGround)
@@ -127,33 +119,28 @@ namespace Hi
                         Jump();
                         newAnimation = "jump";
                     }
-                }
-
-                if (keyState.IsKeyDown(Keys.Up) ||
+                } if (keyState.IsKeyDown(Keys.Up) ||
                     keyState.IsKeyDown(Keys.W))
                 {
                     checkLevelTransition();
-                }
+				} if (keyState.IsKeyDown(Keys.E) && lastState.IsKeyUp(Keys.E))
+				{
+					Drug();
+					if (dead)
+					{
+						newAnimation = "die";
+					}
+				}
 
-
-                if (currentAnimation == "jump")
+				if (currentAnimation == "jump")
                 {
                     newAnimation = "jump";
-                }
-
-                if (currentAnimation == "die")
+                } else if (currentAnimation == "die")
                 {
                     newAnimation = "die";
                 }
 
-                if (keyState.IsKeyDown(Keys.E) && lastState.IsKeyUp(Keys.E))
-                {
-                    Drug();
-                    if (dead)
-                    {
-                        newAnimation = "die";
-                    }
-                }
+                
 
                 if (newAnimation != currentAnimation)
                 {
@@ -161,8 +148,8 @@ namespace Hi
                 }
                 lastState = keyState;
             }
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            velocity += fallSpeed * 60 * elapsed;
+            float elapsed = 1/60.0f;
+            velocity += fallSpeed;
 
             repositionCamera();
             //base.Update(gameTime, true);
@@ -201,27 +188,16 @@ namespace Hi
                 }
                 else
                 {
-                    if (currentAnimation == "jump") if (animations["jump"].signalIndex == 1) animations["jump"].nextFrame();
+                    if (currentAnimation == "jump") 
+						if (animations["jump"].signalIndex == 1) animations["jump"].nextFrame();
                 }
             }
-            Vector2 newPosition = worldLocation + moveAmount;
-            newPosition = new Vector2(MathHelper.Clamp(newPosition.X, 0, Camera.WorldRectangle.Width - frameWidth),
-            MathHelper.Clamp(newPosition.Y, 2 * (-TileMap.TileSize), Camera.WorldRectangle.Height - frameHeight));
-            worldLocation = newPosition;
-            lastMove = moveAmount;
+           	worldLocation += moveAmount;
+			if(worldLocation.Y > Camera.WorldRectangle.Height){
+				Kill ();
+			}
         }
 
-
-
-        public void Clean()
-        {
-            if (!Game1.OnDrugs) return;
-            if (inyecciones > 0)
-            {
-                inyecciones--;
-                Game1.OnDrugs = false;
-            }
-        }
         public void Jump()
         {
             velocity.Y = -450;
@@ -231,11 +207,24 @@ namespace Hi
 
         public void Kill()
         {
-            LivesRemaining--;
-            velocity.X = 0;
-            dead = true;
-            PlayAnimation("die");
+			if (!dead) {
+				LivesRemaining--;
+				velocity.X = 0;
+				dead = true;
+				PlayAnimation ("die");
+			}
         }
+
+		public void Clean()
+		{
+			if (!Game1.OnDrugs) return;
+			if (inyecciones > 0)
+			{
+				inyecciones--;
+				Game1.OnDrugs = false;
+			}
+			
+		}
 
         public void Drug()
         {
@@ -243,13 +232,20 @@ namespace Hi
             {
                 Game1.OnDrugs = true;
                 drugCount--;
+				safePosition = worldLocation;
             }
         }
+
+		public void GoSafe(){
+			worldLocation = safePosition;
+		}
+
         public void Revive()
         {
             drugCount = 0;
             inyecciones = 5;
             PlayAnimation("idle");
+			velocity = Vector2.Zero;
             dead = false;
 			Game1.OnDrugs = false;
         }

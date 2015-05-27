@@ -149,17 +149,17 @@ namespace Hi {
 
         #region Public Methods
         public override void Update(GameTime gameTime) {
-            if (!enabled || !Camera.onCamera(WorldRectangle)) return;
+            if (!enabled || !Camera.ObjectIsVisible (WorldRectangle)) return;
             Vector2 oldLocation = worldLocation;
 
             if (!Dead && (Game1.OnDrugs || type == 3) ) {
-                velocity = new Vector2(0, velocity.Y);
+                velocity.X = 0;
 
-                Vector2 direction = new Vector2(1, 0);
+                Vector2 direction = Vector2.UnitX;
                 flipped = true;
 
                 if (facingLeft) {
-                    direction = new Vector2(-1, 0);
+                    direction *= -1;
                     flipped = false;
                 }
 
@@ -168,23 +168,16 @@ namespace Hi {
                 velocity += fallSpeed;
             }
 
-            //base.Update(gameTime);
-
-
-            //if (!enabled || ! Camera.onCamera(collisionRectangle)) return;
             Vector2 newPosition;
             if (!Game1.OnDrugs && type!= 3)
             {
-                newPosition = defaultLocation;
-                newPosition = new Vector2(MathHelper.Clamp(newPosition.X, 0, Camera.WorldRectangle.Width - frameWidth),
-                                          MathHelper.Clamp(newPosition.Y, 2 * (-TileMap.TileSize), Camera.WorldRectangle.Height - frameHeight));
-                worldLocation = newPosition;
+                worldLocation = defaultLocation;
                 if (currentAnimation == "die") enabled = false;
                 currentAnimation = "idle";
                 updateAnimation(gameTime);
                 return;
             }
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float elapsed = 1/60.0f;
             updateAnimation(gameTime);
             if (velocity.Y != 0) onGround = false;
 
@@ -193,10 +186,11 @@ namespace Hi {
             moveAmount = horizontalCollisionTest(moveAmount);
             moveAmount = verticalCollisionTest(moveAmount);
             newPosition = worldLocation + moveAmount;
-            newPosition = new Vector2(MathHelper.Clamp(newPosition.X, 0, Camera.WorldRectangle.Width - frameWidth),
-            MathHelper.Clamp(newPosition.Y, 2 * (-TileMap.TileSize), Camera.WorldRectangle.Height - frameHeight));
             worldLocation = newPosition;
 
+			if(worldLocation.Y > Camera.WorldRectangle.Height){
+				enabled = false;
+			}
 
 
 			if (!Game1.OnDrugs && type !=3) {

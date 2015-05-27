@@ -6,7 +6,9 @@ Hi/Hi/bin
 Hi/Hi/Properties
 Hi/Hi/Content
 Hi/Hi/HiContent/Sound
-LevelEditor
+LevelEditor/LevelEditor/bin
+LevelEditor/LevelEditor/Properties
+LevelEditor/LevelEditor/LevelEditor.csproj
 BMFont/*.csproj
 BMFont/bin
 BMFont/obj

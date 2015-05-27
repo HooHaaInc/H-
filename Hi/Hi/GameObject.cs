@@ -108,7 +108,7 @@ namespace Hi
 				worldLocation = newPosition;
 				return;
 			}
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+			float elapsed = 1 / 60.0f;
             updateAnimation(gameTime);
             if (velocity.Y != 0) onGround = false;
 
@@ -124,7 +124,7 @@ namespace Hi
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (!enabled) return;
+            if (!enabled || !Camera.ObjectIsVisible (WorldRectangle)) return;
             if (animations.ContainsKey(currentAnimation)){
                 SpriteEffects effect = SpriteEffects.None;
                 if (flipped)effect = SpriteEffects.FlipHorizontally;
@@ -160,19 +160,11 @@ namespace Hi
             }
             Vector2 mapCell1 = TileMap.GetCellByPixel(corner1);
             Vector2 mapCell2 = TileMap.GetCellByPixel(corner2);
-			//Platform platform1 = LevelManager.PlatformAt (corner1);
-			//Platform platform2 = LevelManager.PlatformAt (corner2);
             if (!TileMap.MapSquareIsPassable(mapCell1) || !TileMap.MapSquareIsPassable(mapCell2) )//|| platform1 != null || platform2 != null)
             {
                 moveAmount.X = 0;
                 velocity.X = 0;
             }
-
-			/*if (platform1 != null) {
-				platform1.addAbove (this);
-			} else if (platform2 != null)
-				platform2.addAbove (this);
-*/
 
             return moveAmount;
         }
@@ -182,35 +174,27 @@ namespace Hi
             if (moveAmount.Y == 0) return moveAmount;
             Rectangle afterMoveRect = CollisionRectangle;
             afterMoveRect.Offset((int)moveAmount.X, (int)moveAmount.Y);
-            Vector2 corner1, corner2;
+			Vector2 corner1 = new Vector2(afterMoveRect.Left + 1, afterMoveRect.Bottom);
+			Vector2 corner2 = new Vector2(afterMoveRect.Right - 1, afterMoveRect.Bottom);
+			Platform platform1 = LevelManager.PlatformAt (corner1 + Vector2.UnitY);
+			Platform platform2 = LevelManager.PlatformAt (corner2 + Vector2.UnitY);
             if (moveAmount.Y < 0)
             {
                 corner1 = new Vector2(afterMoveRect.Left + 1, afterMoveRect.Top);
                 corner2 = new Vector2(afterMoveRect.Right - 1, afterMoveRect.Top);
             }
-            else
-            {
-                corner1 = new Vector2(afterMoveRect.Left + 1, afterMoveRect.Bottom);
-                corner2 = new Vector2(afterMoveRect.Right - 1, afterMoveRect.Bottom);
-            }
             Vector2 mapCell1 = TileMap.GetCellByPixel(corner1);
             Vector2 mapCell2 = TileMap.GetCellByPixel(corner2);
-			Platform platform1 = LevelManager.PlatformAt (corner1);
-			Platform platform2 = LevelManager.PlatformAt (corner2);
 
-			if (moveAmount.Y > 0) {
-				if (platform1 != null) {
-					platform1.addAbove (this);
-					onGround = true;
-					velocity.Y = 0;
-					moveAmount.Y = 0;
-				} else if (platform2 != null) {
-					platform2.addAbove (this);
-					onGround = true;
-					velocity.Y = 0;
-					moveAmount.Y = 0;
-				}
-				if(autoMove.Y != 0) moveAmount.Y = autoMove.Y;
+
+
+			if (platform1 != null || platform2 != null) {
+				if (platform1 == null)
+					platform1 = platform2;
+				moveAmount.Y = 0;
+				moveAmount += platform1.Positionate (this);
+				onGround = true;
+				velocity.Y = 0;
 			}
 
             if (!TileMap.MapSquareIsPassable(mapCell1) || !TileMap.MapSquareIsPassable(mapCell2) )//|| platform1 != null || platform2 != null)
@@ -219,6 +203,7 @@ namespace Hi
                 moveAmount.Y = 0;
                 velocity.Y = 0;
             }
+
             return moveAmount;
         }
 

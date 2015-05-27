@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Fonts\pericles8.spritefont</Source>
+      <Name>Fonts\pericles8</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Fonts\pericles8.xnb</Output>
+      <Time>2015-03-09T22:48:39.6489584-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Gem.png</Source>
+      <Name>Textures\Gem</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Gem.xnb</Output>
+      <Time>2015-03-09T22:48:58.1560169-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\PlatformTiles.png</Source>
+      <Name>Textures\PlatformTiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\PlatformTiles.xnb</Output>
+      <Time>2015-05-01T15:48:16.2258388-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Gem.png</Source>
+      <Name>Textures\Sprites\Gem</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Gem.xnb</Output>
+      <Time>2015-03-09T22:48:58.1670175-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterA\Die.png</Source>
+      <Name>Textures\Sprites\MonsterA\Die</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterA\Die.xnb</Output>
+      <Time>2015-03-09T22:48:58.1710178-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterA\Idle.png</Source>
+      <Name>Textures\Sprites\MonsterA\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterA\Idle.xnb</Output>
+      <Time>2015-03-09T22:48:58.1740179-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterA\Run.png</Source>
+      <Name>Textures\Sprites\MonsterA\Run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterA\Run.xnb</Output>
+      <Time>2015-03-09T22:48:58.1780182-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterB\Die.png</Source>
+      <Name>Textures\Sprites\MonsterB\Die</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterB\Die.xnb</Output>
+      <Time>2015-03-09T22:48:58.1820184-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterB\Idle.png</Source>
+      <Name>Textures\Sprites\MonsterB\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterB\Idle.xnb</Output>
+      <Time>2015-03-09T22:48:58.1860186-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterB\Run.png</Source>
+      <Name>Textures\Sprites\MonsterB\Run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterB\Run.xnb</Output>
+      <Time>2015-03-09T22:48:58.1890188-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterC\Die.png</Source>
+      <Name>Textures\Sprites\MonsterC\Die</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterC\Die.xnb</Output>
+      <Time>2015-03-09T22:48:58.1980193-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterC\Idle.png</Source>
+      <Name>Textures\Sprites\MonsterC\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterC\Idle.xnb</Output>
+      <Time>2015-03-09T22:48:58.2020195-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterC\Run.png</Source>
+      <Name>Textures\Sprites\MonsterC\Run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterC\Run.xnb</Output>
+      <Time>2015-03-09T22:48:58.2060198-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterD\Die.png</Source>
+      <Name>Textures\Sprites\MonsterD\Die</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterD\Die.xnb</Output>
+      <Time>2015-03-09T22:48:58.21002-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterD\Idle.png</Source>
+      <Name>Textures\Sprites\MonsterD\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterD\Idle.xnb</Output>
+      <Time>2015-03-09T22:48:58.2130202-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\MonsterD\Run.png</Source>
+      <Name>Textures\Sprites\MonsterD\Run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\MonsterD\Run.xnb</Output>
+      <Time>2015-03-09T22:48:58.2170204-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Player\Celebrate.png</Source>
+      <Name>Textures\Sprites\Player\Celebrate</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Player\Celebrate.xnb</Output>
+      <Time>2015-03-09T22:48:58.2210206-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Player\Die.png</Source>
+      <Name>Textures\Sprites\Player\Die</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Player\Die.xnb</Output>
+      <Time>2015-03-09T22:48:58.2240208-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Player\Idle.png</Source>
+      <Name>Textures\Sprites\Player\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Player\Idle.xnb</Output>
+      <Time>2015-03-09T22:48:58.227021-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Player\Jump.png</Source>
+      <Name>Textures\Sprites\Player\Jump</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Player\Jump.xnb</Output>
+      <Time>2015-03-09T22:48:58.2310212-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\Sprites\Player\Run.png</Source>
+      <Name>Textures\Sprites\Player\Run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\Sprites\Player\Run.xnb</Output>
+      <Time>2015-03-09T22:48:58.2340214-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Textures\TitleScreen.png</Source>
+      <Name>Textures\TitleScreen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\Textures\TitleScreen.xnb</Output>
+      <Time>2015-03-09T22:48:58.2610229-07:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditorContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditorContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Jorge\Documents\Visual Studio 2010\Projects\Hi\LevelEditor\LevelEditor\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T13:41:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2015-01-17T18:16:51.7810014-07:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

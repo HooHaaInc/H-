@@ -89,10 +89,6 @@ namespace TileEngine
 				screenRectangle.Width,
 				screenRectangle.Height);
 		}
-
-        public static bool onCamera(Rectangle R) {
-            return (ViewPort.Intersects(R));
-        }
 		#endregion
 	}
 }

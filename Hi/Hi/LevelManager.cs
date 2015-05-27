@@ -64,9 +64,9 @@ namespace Hi
         {
 
 			try{
-            	TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"Content/Maps/MAP002.MAP"));
+            	TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"Content/Maps/MAP003.MAP"));
 			}catch{
-				TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"HiContent/Maps/MAP002.MAP"));
+				TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"HiContent/Maps/MAP003.MAP"));
 
 			}
             drugs.Clear();
@@ -78,26 +78,28 @@ namespace Hi
                 for (int y = 0; y < TileMap.MapHeight; y++)
                 {
 					switch(TileMap.MapSquareCodeValue (x, y)){
-					    case "START":
-						    player.WorldLocation = new Vector2 (
-							    x * TileMap.TileSize,
-							    y * TileMap.TileSize);
-						    break;
-					    case "DRUG":
-						    drugs.Add (new Drug (Content, x, y));
-						    break;
-					    case "ENEMY":
-                            enemies.Add(new Enemy(Content, x, y, 3));
-                            break;
-					    case "CHAIR":
-						    enemies.Add (new Enemy (Content, x, y, 1));
-						    break;
-					    case "POT":
-						    enemies.Add (new Enemy (Content, x, y, 2));
-						    break;
-					    case "PLATFORM":
-						    platforms.Add (new Platform (Content, x, y));
-						    break;
+					case "":
+						continue;
+				    case "START":
+					    player.WorldLocation = new Vector2 (
+						    x * TileMap.TileSize,
+						    y * TileMap.TileSize);
+					    break;
+				    case "DRUG":
+					    drugs.Add (new Drug (Content, x, y));
+					    break;
+				    case "ENEMY":
+                        enemies.Add(new Enemy(Content, x, y, 3));
+                        break;
+				    case "CHAIR":
+					    enemies.Add (new Enemy (Content, x, y, 1));
+					    break;
+				    case "POT":
+					    enemies.Add (new Enemy (Content, x, y, 2));
+					    break;
+				    case "PLATFORM":
+					    platforms.Add (new Platform (Content, x, y));
+					    break;
 					}
 
                 }
@@ -155,6 +157,7 @@ namespace Hi
                             {
                                 player.Kill();
                             }
+							break;
                         }
                     }
                     else

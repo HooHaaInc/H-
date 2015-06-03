@@ -33,15 +33,26 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.3.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Camera.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="MapSquare.cs" />
+    <Compile Include="TileMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
-    <None Include="Content\Content.mgcb" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\HooHaaUtils\HooHaaUtils.csproj">
+      <Project>{347F4460-2F2D-487C-BE1E-A8DF33279160}</Project>
+      <Name>HooHaaUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

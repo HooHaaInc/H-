@@ -33,15 +33,415 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\MonoGame.Framework.WindowsDX.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Icon.png" />
-    <None Include="Content\Content.mgcb" />
+    <Compile Include="AnimationStrip.cs" />
+    <Compile Include="Drug.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="LevelManager.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\HooHaaUtils\HooHaaUtils.csproj">
+      <Project>{347F4460-2F2D-487C-BE1E-A8DF33279160}</Project>
+      <Name>HooHaaUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TileEngine\TileEngine.csproj">
+      <Project>{162BE564-083A-43C4-B44F-4BDC3E255352}</Project>
+      <Name>TileEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="..\HiContent\Maps\MAP000.MAP">
+      <Link>HiContent\Maps\MAP000.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP001.MAP">
+      <Link>HiContent\Maps\MAP001.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP002.MAP">
+      <Link>HiContent\Maps\MAP002.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP003.MAP">
+      <Link>HiContent\Maps\MAP003.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP005.MAP">
+      <Link>HiContent\Maps\MAP005.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP007.MAP">
+      <Link>HiContent\Maps\MAP007.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP008.MAP">
+      <Link>HiContent\Maps\MAP008.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP011.MAP">
+      <Link>HiContent\Maps\MAP011.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP016.MAP">
+      <Link>HiContent\Maps\MAP016.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\HiContent\Maps\MAP017.MAP">
+      <Link>HiContent\Maps\MAP017.MAP</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HiContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\HiContent\rect.mgcontent">
+      <Link>HiContent\rect.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\rect.xnb">
+      <Link>HiContent\rect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Fonts\pericles8.xnb">
+      <Link>HiContent\Fonts\pericles8.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Fonts\myFont\myFont.fnt">
+      <Link>HiContent\Fonts\myFont\myFont.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Fonts\myFont\myFont_0.mgcontent">
+      <Link>HiContent\Fonts\myFont\myFont_0.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Fonts\myFont\myFont_0.xnb">
+      <Link>HiContent\Fonts\myFont\myFont_0.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\dead.mgcontent">
+      <Link>HiContent\sounds\dead.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\dead.wma">
+      <Link>HiContent\sounds\dead.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\dead.xnb">
+      <Link>HiContent\sounds\dead.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettingBack.mgcontent">
+      <Link>HiContent\sounds\gettingBack.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettingBack.wma">
+      <Link>HiContent\sounds\gettingBack.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettingBack.xnb">
+      <Link>HiContent\sounds\gettingBack.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettinHi.mgcontent">
+      <Link>HiContent\sounds\gettinHi.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettinHi.wma">
+      <Link>HiContent\sounds\gettinHi.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\gettinHi.xnb">
+      <Link>HiContent\sounds\gettinHi.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\High.mgcontent">
+      <Link>HiContent\sounds\High.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\High.wma">
+      <Link>HiContent\sounds\High.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\High.xnb">
+      <Link>HiContent\sounds\High.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\normal.mgcontent">
+      <Link>HiContent\sounds\normal.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\normal.wma">
+      <Link>HiContent\sounds\normal.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\normal.xnb">
+      <Link>HiContent\sounds\normal.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\titlescreen.mgcontent">
+      <Link>HiContent\sounds\titlescreen.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\titlescreen.wma">
+      <Link>HiContent\sounds\titlescreen.wma</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\sounds\titlescreen.xnb">
+      <Link>HiContent\sounds\titlescreen.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\drug.mgcontent">
+      <Link>HiContent\Textures\drug.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\drug.xnb">
+      <Link>HiContent\Textures\drug.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Gem.mgcontent">
+      <Link>HiContent\Textures\Gem.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Gem.xnb">
+      <Link>HiContent\Textures\Gem.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\greenTexture.mgcontent">
+      <Link>HiContent\Textures\greenTexture.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\greenTexture.xnb">
+      <Link>HiContent\Textures\greenTexture.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\PlatformTiles.mgcontent">
+      <Link>HiContent\Textures\PlatformTiles.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\PlatformTiles.xnb">
+      <Link>HiContent\Textures\PlatformTiles.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\PlatformTilesf.mgcontent">
+      <Link>HiContent\Textures\PlatformTilesf.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\PlatformTilesf.xnb">
+      <Link>HiContent\Textures\PlatformTilesf.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\redTexture.mgcontent">
+      <Link>HiContent\Textures\redTexture.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\redTexture.xnb">
+      <Link>HiContent\Textures\redTexture.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\TitleScreen.mgcontent">
+      <Link>HiContent\Textures\TitleScreen.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\TitleScreen.xnb">
+      <Link>HiContent\Textures\TitleScreen.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu1.mgcontent">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu1.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu1.xnb">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu1.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu2.mgcontent">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu2.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu2.xnb">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu2.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu3.mgcontent">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu3.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\HelpMenus\HelpMenu3.xnb">
+      <Link>HiContent\Textures\HelpMenus\HelpMenu3.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Gem.mgcontent">
+      <Link>HiContent\Textures\Sprites\Gem.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Gem.xnb">
+      <Link>HiContent\Textures\Sprites\Gem.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\ladrilloGris.mgcontent">
+      <Link>HiContent\Textures\Sprites\ladrilloGris.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\ladrilloGris.xnb">
+      <Link>HiContent\Textures\Sprites\ladrilloGris.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Die.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterA\Die.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Die.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterA\Die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Idle.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterA\Idle.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Idle.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterA\Idle.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Run.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterA\Run.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\Run.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterA\Run.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\silla.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterA\silla.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterA\silla.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterA\silla.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Die.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterB\Die.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Die.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterB\Die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Idle.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterB\Idle.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Idle.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterB\Idle.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Run.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterB\Run.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterB\Run.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterB\Run.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Die.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterC\Die.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Die.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterC\Die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Idle.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterC\Idle.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Idle.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterC\Idle.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Run.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterC\Run.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterC\Run.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterC\Run.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Die.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterD\Die.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Die.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterD\Die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Idle.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterD\Idle.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Idle.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterD\Idle.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Run.mgcontent">
+      <Link>HiContent\Textures\Sprites\MonsterD\Run.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\MonsterD\Run.xnb">
+      <Link>HiContent\Textures\Sprites\MonsterD\Run.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Celebrate.mgcontent">
+      <Link>HiContent\Textures\Sprites\Player\Celebrate.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Celebrate.xnb">
+      <Link>HiContent\Textures\Sprites\Player\Celebrate.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Die.mgcontent">
+      <Link>HiContent\Textures\Sprites\Player\Die.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Die.xnb">
+      <Link>HiContent\Textures\Sprites\Player\Die.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Idle.mgcontent">
+      <Link>HiContent\Textures\Sprites\Player\Idle.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Idle.xnb">
+      <Link>HiContent\Textures\Sprites\Player\Idle.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Jump.mgcontent">
+      <Link>HiContent\Textures\Sprites\Player\Jump.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Jump.xnb">
+      <Link>HiContent\Textures\Sprites\Player\Jump.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Run.mgcontent">
+      <Link>HiContent\Textures\Sprites\Player\Run.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\HiContent\Textures\Sprites\Player\Run.xnb">
+      <Link>HiContent\Textures\Sprites\Player\Run.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

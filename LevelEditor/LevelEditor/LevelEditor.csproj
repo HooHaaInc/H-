@@ -33,15 +33,65 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\MonoGame.Framework.WindowsDX.3.3.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
-    <None Include="Content\Content.mgcb" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\HooHaaUtils\HooHaaUtils.csproj">
+      <Project>{347F4460-2F2D-487C-BE1E-A8DF33279160}</Project>
+      <Name>HooHaaUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TileEngine\TileEngine.csproj">
+      <Project>{162BE564-083A-43C4-B44F-4BDC3E255352}</Project>
+      <Name>TileEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LevelEditorContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\LevelEditorContent\rect.mgcontent">
+      <Link>LevelEditorContent\rect.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\rect.xnb">
+      <Link>LevelEditorContent\rect.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Fonts\pericles8.xnb">
+      <Link>LevelEditorContent\Fonts\pericles8.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Fonts\myFont\myFont.fnt">
+      <Link>LevelEditorContent\Fonts\myFont\myFont.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Fonts\myFont\myFont_0.mgcontent">
+      <Link>LevelEditorContent\Fonts\myFont\myFont_0.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Fonts\myFont\myFont_0.xnb">
+      <Link>LevelEditorContent\Fonts\myFont\myFont_0.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Textures\PlatformTiles.mgcontent">
+      <Link>LevelEditorContent\Textures\PlatformTiles.mgcontent</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\LevelEditorContent\Textures\PlatformTiles.xnb">
+      <Link>LevelEditorContent\Textures\PlatformTiles.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

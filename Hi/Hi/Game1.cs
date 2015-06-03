@@ -4,11 +4,10 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using BMFont;
+using HooHaaUtils;
 using TileEngine;
 
 namespace Hi
@@ -34,7 +33,7 @@ namespace Hi
         Vector2 gameOverPosition = new Vector2(350, 300);
         Vector2 livesPosition = new Vector2(20, 30);
         Vector2 inyeccionPosition = new Vector2(20, 20);
-		Vector2[] menuPositions = new Vector2[] {
+		Vector2[] menuPositions = {
 			new Vector2(350, 300),
 			new Vector2(350, 320),
 			new Vector2(350, 340)
@@ -81,7 +80,7 @@ namespace Hi
         /// </summary>
         protected override void LoadContent()
         {
-			try{
+			try {
 				normal = Content.Load<Song> (@"sounds/normal.wav");
 				high = Content.Load<Song> (@"sounds/High.wav");
 				gettingHi = Content.Load<Song> (@"sounds/gettinHi.wav");
@@ -89,7 +88,7 @@ namespace Hi
 				title = Content.Load<Song> (@"sounds/titlescreen.wav");
 
 				rip = Content.Load<Song> (@"sounds/dead.wav");
-			}catch{
+			} catch {
 				normal = Content.Load<Song> (@"sounds/normal");
 				high = Content.Load<Song> (@"sounds/High");
 				gettingHi = Content.Load<Song> (@"sounds/gettinHi");
@@ -144,8 +143,9 @@ namespace Hi
 			switch(gameState){
 			case GameState.TitleScreen:
 				if (entro) {
-					MediaPlayer.Stop ();
+					MediaPlayer.Pause ();
 					MediaPlayer.Play (title);
+					MediaPlayer.IsRepeating = true;
 					entro = false;
 				}
 				if (keyState.IsKeyDown (Keys.Enter) || gamepadState.Buttons.A == ButtonState.Pressed) {

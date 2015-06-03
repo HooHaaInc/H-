@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hi", "Hi\Hi\Hi.csproj", "{E641768F-65D6-4B83-8E4A-912CC2482D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HooHaaUtils", "HooHaaUtils\HooHaaUtils.csproj", "{347F4460-2F2D-487C-BE1E-A8DF33279160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileEngine", "TileEngine\TileEngine.csproj", "{162BE564-083A-43C4-B44F-4BDC3E255352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelEditor", "LevelEditor\LevelEditor\LevelEditor.csproj", "{C1374BC4-B680-4552-825D-81729B4438AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{162BE564-083A-43C4-B44F-4BDC3E255352}.Debug|x86.ActiveCfg = Debug|x86
+		{162BE564-083A-43C4-B44F-4BDC3E255352}.Debug|x86.Build.0 = Debug|x86
+		{162BE564-083A-43C4-B44F-4BDC3E255352}.Release|x86.ActiveCfg = Release|x86
+		{162BE564-083A-43C4-B44F-4BDC3E255352}.Release|x86.Build.0 = Release|x86
+		{347F4460-2F2D-487C-BE1E-A8DF33279160}.Debug|x86.ActiveCfg = Debug|x86
+		{347F4460-2F2D-487C-BE1E-A8DF33279160}.Debug|x86.Build.0 = Debug|x86
+		{347F4460-2F2D-487C-BE1E-A8DF33279160}.Release|x86.ActiveCfg = Release|x86
+		{347F4460-2F2D-487C-BE1E-A8DF33279160}.Release|x86.Build.0 = Release|x86
+		{C1374BC4-B680-4552-825D-81729B4438AF}.Debug|x86.ActiveCfg = Debug|x86
+		{C1374BC4-B680-4552-825D-81729B4438AF}.Debug|x86.Build.0 = Debug|x86
+		{C1374BC4-B680-4552-825D-81729B4438AF}.Release|x86.ActiveCfg = Release|x86
+		{C1374BC4-B680-4552-825D-81729B4438AF}.Release|x86.Build.0 = Release|x86
+		{E641768F-65D6-4B83-8E4A-912CC2482D7E}.Debug|x86.ActiveCfg = Debug|x86
+		{E641768F-65D6-4B83-8E4A-912CC2482D7E}.Debug|x86.Build.0 = Debug|x86
+		{E641768F-65D6-4B83-8E4A-912CC2482D7E}.Release|x86.ActiveCfg = Release|x86
+		{E641768F-65D6-4B83-8E4A-912CC2482D7E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal

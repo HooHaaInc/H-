@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using TileEngine;
-using BMFont;
+using HooHaaUtils;
 using System.IO;
 
 #endregion

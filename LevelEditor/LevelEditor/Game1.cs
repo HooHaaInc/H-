@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using TileEngine;
-using BMFont;
+using HootileriHaa;
 using System.IO;
 
 #endregion
@@ -25,13 +25,19 @@ namespace LevelEditor
 		Vector2 cursor = new Vector2(0,0);
 		Texture2D rect;
 		string currentString;
-		enum EditorState { Background = 0, Map, Clean, Drugged, Foreground, CellCode, Options }
-		EditorState editorState = EditorState.Map;
-		string[] layer = new string[] { "BACKGROUND", "INTERACTIVE", "CLEAN", "DRUGGED", "FOREGROUND" };
+		enum EditorState { Background = 0, Clean, Drugged, Foreground, Both, CellCode, Options }
+		EditorState editorState = EditorState.Clean;
+		string[] layer = new string[] { "BACKGROUND", "CLEAN", "DRUGGED", "FOREGROUND", "BOTH" };
 		string[] options = new string[] {"Load Map", "Save Map", "Exit"};
 		int currentOption = 0;
         Vector2 optionsPosition = new Vector2(350, 200);
 		int currentMap = 0;
+
+		MapSquare[] predefined = new MapSquare[] {
+			new MapSquare(15, "", 0),
+			new MapSquare(12, 14, "", 1),
+			new MapSquare(14, 12, "", 2)
+		};
 
 		private Rectangle CursorRectangle{
 			get{ 
@@ -83,16 +89,18 @@ namespace LevelEditor
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-			TileMap.Initialize (Content.Load <Texture2D> ("Textures/PlatformTiles"), 800, 500);
+			TileMap.Initialize (Content.Load <Texture2D> ("Textures/PlatformTiles"), 800, 480);
 			font = new BitFont (Content);
 			TileMap.spriteFont = font;
 			rect = Content.Load <Texture2D> ("rect");
 			Camera.WorldRectangle = new Rectangle(0, 0, 
 			                                      TileMap.MapWidth * TileMap.TileSize, 
 			                                      TileMap.MapHeight * TileMap.TileSize);
-			Camera.Position = Vector2.Zero;
-			Camera.ViewPortWidth = 800;
-			Camera.ViewPortHeight = 480;
+			Camera.ViewPort = new Rectangle (
+				0,
+				0, 
+				graphics.PreferredBackBufferWidth, 
+				graphics.PreferredBackBufferHeight);
             //TODO: use this.Content to load your game content here 
         }
 
@@ -104,7 +112,7 @@ namespace LevelEditor
         protected override void Update(GameTime gameTime)
         {
 			KeyboardState keyState = Keyboard.GetState ();
-			MapSquare prevtile;
+			MapSquare prevtile = null;
 			int prevground;
             // For Mobile devices, this logic will close the Game when the Back button is pressed
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -148,7 +156,7 @@ namespace LevelEditor
 					editorState = EditorState.Foreground;
 				} else if (keyState.IsKeyDown (Keys.X) && lastState.IsKeyUp (Keys.X)) {
 					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition, 0, 1);
-					editorState = EditorState.Map;
+					editorState = EditorState.Clean;
 				} else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
 				}
@@ -191,52 +199,56 @@ namespace LevelEditor
 
 				} else if (keyState.IsKeyDown (Keys.X) && lastState.IsKeyUp (Keys.X)) {
 					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,2, 1);
-					editorState = EditorState.Map;
+					editorState = EditorState.Clean;
 				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
 				}
 				repositionCamera ();
 				break;
-			case EditorState.Map:
+			//case EditorState.Map:
 			case EditorState.Clean:
 			case EditorState.Drugged:
 				if (keyState.IsKeyDown (Keys.Up) && lastState.IsKeyUp (Keys.Up)) {
 					prevtile = TileMap.GetMapSquareAtCell (cursor);//.GetMapSquareAtPixel (new Vector2 (cursor.X, cursor.Y));
 					if (cursor.Y > 0)
 						--cursor.Y;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
 						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
 				} else if (keyState.IsKeyDown (Keys.Down) && lastState.IsKeyUp (Keys.Down)) {
 					prevtile = TileMap.GetMapSquareAtCell (cursor);
 					if (cursor.Y < TileMap.MapHeight -1)
 						++cursor.Y;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
 						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
 				} else if (keyState.IsKeyDown (Keys.Left) && lastState.IsKeyUp (Keys.Left)) {
 					prevtile = TileMap.GetMapSquareAtCell (cursor);
 					if (cursor.X > 0)
 						--cursor.X;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
 						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
 				} else if (keyState.IsKeyDown (Keys.Right) && lastState.IsKeyUp (Keys.Right)) {
 					prevtile = TileMap.GetMapSquareAtCell (cursor);
 					if (cursor.X < TileMap.MapWidth -1)
 						++cursor.X;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
 						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
 				} else if (keyState.IsKeyDown (Keys.PageUp) && lastState.IsKeyUp (Keys.PageUp)) {
-					++TileMap.GetMapSquareAtCell (cursor).LayerTiles [(int)editorState-1];
+						++TileMap.GetMapSquareAtCell (cursor, false)[(int)editorState-1, 2];
 				} else if (keyState.IsKeyDown (Keys.PageDown) && lastState.IsKeyUp (Keys.PageDown)) {
-					--TileMap.GetMapSquareAtCell (cursor).LayerTiles [(int)editorState-1];
+					--TileMap.GetMapSquareAtCell (cursor, false)[(int)editorState-1, 2];
 				} else if (keyState.IsKeyDown (Keys.Enter) && lastState.IsKeyUp (Keys.Enter)) {
 					editorState = EditorState.CellCode;
-					currentString = TileMap.GetMapSquareAtCell (cursor).CodeValue;
+					currentString = TileMap.GetMapSquareAtCell (cursor,false).CodeValue;
 					TileMap.GetMapSquareAtCell (cursor).CodeValue = "";
 					//currentLayer = -1;
 				}else if (keyState.IsKeyDown (Keys.Space) && lastState.IsKeyUp (Keys.Space)) {
-					TileMap.GetMapSquareAtCell (cursor).TogglePassable ();
+					TileMap.GetMapSquareAtCell (cursor,false).TogglePassable ((int)editorState-1);
 				}else if (keyState.IsKeyDown (Keys.Delete) && lastState.IsKeyUp (Keys.Delete)) {
-					TileMap.SetMapSquareAtCell (cursor, MapSquare.Neutral);
+					TileMap.SetMapSquareAtCell (cursor, null);
 				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
 				}else if (keyState.IsKeyDown (Keys.Z) && lastState.IsKeyUp (Keys.Z)) {
@@ -246,21 +258,89 @@ namespace LevelEditor
 					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 2);
 					editorState = EditorState.Foreground;
 				}else if (keyState.IsKeyDown (Keys.A) && lastState.IsKeyUp (Keys.A)) {
-					editorState = EditorState.Map;
+					editorState = EditorState.Both;
 				}else if (keyState.IsKeyDown (Keys.S) && lastState.IsKeyUp (Keys.S)) {
 					editorState = EditorState.Clean;
 				}else if (keyState.IsKeyDown (Keys.D) && lastState.IsKeyUp (Keys.D)) {
 					editorState = EditorState.Drugged;
+				}else if( keyState.IsKeyDown (Keys.D1) && lastState.IsKeyUp(Keys.D1)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [0]);
+				}else if( keyState.IsKeyDown (Keys.D2) && lastState.IsKeyUp(Keys.D2)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [1]);
+				}else if( keyState.IsKeyDown (Keys.D3) && lastState.IsKeyUp(Keys.D3)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [2]);
+				}
+				repositionCamera ();
+				break;
+			case EditorState.Both:
+				if (keyState.IsKeyDown (Keys.Up) && lastState.IsKeyUp (Keys.Up)) {
+					prevtile = TileMap.GetMapSquareAtCell (cursor);//.GetMapSquareAtPixel (new Vector2 (cursor.X, cursor.Y));
+					if (cursor.Y > 0)
+						--cursor.Y;
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
+						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
+				} else if (keyState.IsKeyDown (Keys.Down) && lastState.IsKeyUp (Keys.Down)) {
+					prevtile = TileMap.GetMapSquareAtCell (cursor);
+					if (cursor.Y < TileMap.MapHeight -1)
+						++cursor.Y;
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
+						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
+				} else if (keyState.IsKeyDown (Keys.Left) && lastState.IsKeyUp (Keys.Left)) {
+					prevtile = TileMap.GetMapSquareAtCell (cursor);
+					if (cursor.X > 0)
+						--cursor.X;
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
+						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
+				} else if (keyState.IsKeyDown (Keys.Right) && lastState.IsKeyUp (Keys.Right)) {
+					prevtile = TileMap.GetMapSquareAtCell (cursor);
+					if (cursor.X < TileMap.MapWidth -1)
+						++cursor.X;
+					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl)) {
+						TileMap.SetMapSquareAtCell (cursor, prevtile);
+					}
+				} else if (keyState.IsKeyDown (Keys.PageUp) && lastState.IsKeyUp (Keys.PageUp)) {
+					++TileMap.GetMapSquareAtCell (cursor,false)[0, 1];
+				} else if (keyState.IsKeyDown (Keys.PageDown) && lastState.IsKeyUp (Keys.PageDown)) {
+					--TileMap.GetMapSquareAtCell (cursor,false)[0, 1];
+				} else if (keyState.IsKeyDown (Keys.Enter) && lastState.IsKeyUp (Keys.Enter)) {
+					editorState = EditorState.CellCode;
+					currentString = TileMap.GetMapSquareAtCell (cursor,false).CodeValue;
+					TileMap.GetMapSquareAtCell (cursor).CodeValue = "";
+					//currentLayer = -1;
+				}else if (keyState.IsKeyDown (Keys.Space) && lastState.IsKeyUp (Keys.Space)) {
+					TileMap.GetMapSquareAtCell (cursor,false).TogglePassable (2);
+				}else if (keyState.IsKeyDown (Keys.Delete) && lastState.IsKeyUp (Keys.Delete)) {
+					TileMap.SetMapSquareAtCell (cursor, null);
+				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
+					editorState = EditorState.Options;
+				}else if (keyState.IsKeyDown (Keys.Z) && lastState.IsKeyUp (Keys.Z)) {
+					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 0);
+					editorState = EditorState.Background;
+				}else if (keyState.IsKeyDown (Keys.C) && lastState.IsKeyUp (Keys.C)) {
+					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 2);
+					editorState = EditorState.Foreground;
+				}else if (keyState.IsKeyDown (Keys.S) && lastState.IsKeyUp (Keys.S)) {
+					editorState = EditorState.Clean;
+				}else if (keyState.IsKeyDown (Keys.D) && lastState.IsKeyUp (Keys.D)) {
+					editorState = EditorState.Drugged;
+				}else if( keyState.IsKeyDown (Keys.D1) && lastState.IsKeyUp(Keys.D1)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [0]);
+				}else if( keyState.IsKeyDown (Keys.D2) && lastState.IsKeyUp(Keys.D2)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [1]);
+				}else if( keyState.IsKeyDown (Keys.D3) && lastState.IsKeyUp(Keys.D3)){
+					TileMap.SetMapSquareAtCell (cursor, predefined [2]);
 				}
 				repositionCamera ();
 				break;
 			case EditorState.CellCode:
 				if(keyState.IsKeyDown (Keys.Enter) && lastState.IsKeyUp (Keys.Enter)){
-					editorState = EditorState.Map;
+					editorState = EditorState.Clean;
 					TileMap.GetMapSquareAtCell (cursor).CodeValue = currentString;
-					//currentLayer = 1;
 				}if(keyState.IsKeyDown (Keys.Back) && lastState.IsKeyUp (Keys.Back)){
-					if(currentString.Length > 0)currentString = currentString.Substring (0, currentString.Length - 1);
+					if(currentString.Length > 0) currentString = currentString.Substring (0, currentString.Length - 1);
 					break;
 				}
 				foreach (Keys key in keyState.GetPressedKeys ()){
@@ -277,16 +357,16 @@ namespace LevelEditor
 				break;
 			case EditorState.Options:
 				if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
-					editorState = EditorState.Map;
+					editorState = EditorState.Clean;
 				} else if (keyState.IsKeyDown (Keys.Enter) && lastState.IsKeyUp (Keys.Enter)) {
 					switch (currentOption) {
 					case 0:
 						LoadMap (currentMap);
-						editorState = EditorState.Map;
+						editorState = EditorState.Clean;
 						break;
 					case 1:
 						SaveMap (currentMap);
-						editorState = EditorState.Map;
+						editorState = EditorState.Clean;
 						break;
 					case 2:
 						Exit ();
@@ -327,9 +407,9 @@ namespace LevelEditor
 			spriteBatch.Begin(
 				SpriteSortMode.Immediate,
 				BlendState.AlphaBlend);
-			TileMap.DrawEditMode (spriteBatch, (int)editorState > 4 ? 1 : (int)editorState);
+			TileMap.DrawEditMode (spriteBatch, (int)editorState);// > 3 ? 1 : (int)editorState);
 
-			if (editorState == EditorState.Map ||
+			if (editorState == EditorState.Both ||
 			    editorState == EditorState.Clean ||
 			    editorState == EditorState.Drugged ||
 				editorState == EditorState.Background ||
@@ -337,28 +417,20 @@ namespace LevelEditor
 				spriteBatch.Draw (
 					rect,
 					Camera.WorldToScreen (CursorRectangle, TileMap.GetSizeLayer((int)editorState)),//cursor,
-					Color.White * 0.4f);
-				font.DrawText (spriteBatch, new Vector2 (600, 0), layer [(int)editorState]);
-				font.DrawText (spriteBatch, new Vector2 (0, 0), "Camera.Position: " + Camera.Position.ToString ());
-				font.DrawText (spriteBatch, new Vector2 (0, 20), "CursorPosition: " + CursorPosition.ToString ());
+					Color.White* 0.4f);
+				font.DrawText (spriteBatch, 600, 0, layer [(int)editorState]);
+				//font.DrawText (spriteBatch, new Vector2 (0, 0), "Camera.Position: " + Camera.Position.ToString ());
+				//font.DrawText (spriteBatch, new Vector2 (0, 20), "CursorPosition: " + CursorPosition.ToString ());
 			}
 
 			if(editorState == EditorState.CellCode){
-				spriteBatch.Draw (
-					rect,
-					new Rectangle (0,0,800, 500),
-					Color.Black * 0.5f);
 
 				font.DrawText (spriteBatch, Camera.WorldToScreen (CursorPosition), currentString);
-				font.DrawText (spriteBatch, new Vector2 (600, 0), "CODEVALUE");
+				font.DrawText (spriteBatch, 600, 0, "CODEVALUE");
 			}
 
 
 			if(editorState == EditorState.Options){
-				spriteBatch.Draw (
-					rect,
-					new Rectangle (0,0,800, 500),
-					Color.Black * 0.5f);
 
 				font.DrawText (spriteBatch, optionsPosition - Vector2.UnitY*50, "MAP" +currentMap.ToString().PadLeft(3, '0'));
 				font.DrawText (spriteBatch, optionsPosition, options[0]);

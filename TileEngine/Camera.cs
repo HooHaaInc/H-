@@ -54,6 +54,12 @@ namespace TileEngine
 					ViewPortWidth,
 					ViewPortHeight);
 			}
+			set {
+				position.X = value.X;
+				position.Y = value.Y;
+				viewPortSize.X = value.Width;
+				viewPortSize.Y = value.Height;
+			}
 		}
 		#endregion
 

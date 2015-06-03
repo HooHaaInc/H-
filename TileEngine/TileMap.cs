@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using BMFont;
+using HootileriHaa;
 
 namespace TileEngine
 {
@@ -26,8 +26,6 @@ namespace TileEngine
 		static private int drugoidal = 0;
 		static public bool OnDrugs = false;
 		#endregion
-
-
 
 		public static void Main(string[] args){
 
@@ -54,12 +52,12 @@ namespace TileEngine
 		/// <returns>The size layer.</returns>
 		/// <param name="allLayers">
 		/// 	All layers son las size layers mas el drugged y clean del mapsquare 
-		/// 	[background, interactive, clean, drugged, foreground]
+		/// 	[background, clean, drugged, foreground]
 		/// </param>
 		static public int GetSizeLayer(int allLayers){
-			if (allLayers > 4)
+			if (allLayers >= 4)
 				return 1;
-			return (allLayers + 2) / 3;
+			return (allLayers + 1) / 2;
 		}
 
 		static public int LayerTileSize(int sizelayer){
@@ -69,11 +67,17 @@ namespace TileEngine
 		}
 
 		static public int GetColumnByPixelX(int pixelX, int sizelayer = 1){
-			return pixelX / LayerTileSize (sizelayer);
+			return (int)MathHelper.Clamp (
+				pixelX / LayerTileSize (sizelayer), 
+				0, 
+				(sizelayer==1? MapWidth : sizelayer==0 ? BackgroundWidth : ForegroundWidth)-1);
 		}
 
 		static public int GetRowByPixelY(int pixelY, int sizelayer = 1){
-			return pixelY / LayerTileSize (sizelayer);
+			return (int)MathHelper.Clamp (
+				pixelY / LayerTileSize (sizelayer),
+				0,
+				(sizelayer == 1 ? MapHeight : sizelayer==0 ? BackgroundHeight : ForegroundHeight)-1);
 		}
 
 		static public Vector2 GetCellByPixel(Vector2 pixelLocation, int sizelayer = 1){
@@ -162,20 +166,29 @@ namespace TileEngine
 			return MapSquareIsPassable ((int)cell.X, (int)cell.Y);
 		}
 
-		static public MapSquare GetMapSquareAtCell(int tileX, int tileY){
-			if (tileX >= 0 && tileX < MapWidth && tileY >= 0 && tileY < MapHeight)
+		static public MapSquare GetMapSquareAtCell(int tileX, int tileY, bool canBeNull = true){
+			if (tileX >= 0 && tileX < MapWidth && tileY >= 0 && tileY < MapHeight) {
+				if (!canBeNull && mapCells [tileX, tileY] == null)
+					mapCells [tileX, tileY] = new MapSquare ();
 				return mapCells [tileX, tileY];
-			else
+			}else
 				return null;
 		}
 
-		static public MapSquare GetMapSquareAtCell(Vector2 pos){
-			return GetMapSquareAtCell ((int)pos.X, (int)pos.Y);
+		static public MapSquare GetMapSquareAtCell(Vector2 pos, bool canBeNull = true){
+			return GetMapSquareAtCell ((int)pos.X, (int)pos.Y, canBeNull);
 		}
 
 		static public void SetMapSquareAtCell(int tileX, int tileY, MapSquare tile){
-			if (tileX >= 0 && tileX < MapWidth && tileY >= 0 && tileY < MapHeight)
+			if (tileX >= 0 && tileX < MapWidth && tileY >= 0 && tileY < MapHeight) {
+				if(tile == null){
+					mapCells [tileX, tileY] = null;
+					return;
+				}
+				if (mapCells [tileX, tileY] == null)
+					mapCells [tileX, tileY] = new MapSquare ();
 				mapCells [tileX, tileY].Copy (tile);
+			}
 		}
 
 		static public void SetMapSquareAtCell(Vector2 pos, MapSquare tile){
@@ -207,21 +220,17 @@ namespace TileEngine
 		}
 
 		static public bool isRectanglePassable(Rectangle rect){
-			Rectangle indexes = new Rectangle (
-				GetColumnByPixelX (rect.X),
-				GetRowByPixelY (rect.Y),
-				GetColumnByPixelX (rect.X + rect.Width -1),
-				GetRowByPixelY (rect.Y + rect.Height -1)
-				);
-			for (int x = indexes.X; x <= indexes.Width; ++x)
-				for (int y = indexes.Y; y<=indexes.Height; ++y)
-					if (GetMapSquareAtCell (x,y).Passable == (OnDrugs ? 1 : 2))
+			int startX = GetColumnByPixelX (rect.X);
+			int startY = GetRowByPixelY (rect.Y);
+			int endX = GetColumnByPixelX (rect.X + rect.Width - 1);
+			int endY = GetRowByPixelY (rect.Y + rect.Height - 1);
+			for (int x = startX; x <= endX; ++x)
+				for (int y = startY; y <= endY; ++y)
+					if (!MapSquareIsPassable(x,y))
 						return false;
 			return true;
 		}
 		#endregion
-
-
 
 		#region Tile and Tile Sheet Handling
 		public static int TilesPerRow{
@@ -247,15 +256,11 @@ namespace TileEngine
 			startY = GetRowByPixelY ((int)Camera.Position.Y/2, 0);
 			endY = GetRowByPixelY ((int)Camera.Position.Y/2 + Camera.ViewPortHeight, 0);
 			++drugoidal;
-			Rectangle screenRectangle;
 			for (int x = startX; x <= endX; x++){
 				for (int y = startY; y <= endY; y++) {
-					screenRectangle = CellScreenRectangle (x, y, 0);
-					if (x < 0 || y < 0 || x >= BackgroundWidth || y >= BackgroundHeight)
-						continue;
 					spriteBatch.Draw (
 						tileSheet, 
-						screenRectangle, 
+						CellScreenRectangle (x, y, 0), 
 						TileSourceRectangle (background [x, y]),
 						OnDrugs ? new Color (drugoidal % 256, (drugoidal + 85) % 256, (drugoidal + 170) % 256) : Color.White
 					); 
@@ -267,19 +272,14 @@ namespace TileEngine
 			endY = GetRowByPixelY ((int)Camera.Position.Y + Camera.ViewPortHeight, 1);
 			for (int x = startX; x <= endX; x++)
 				for (int y = startY; y <= endY; y++) {
-					for (int z = 0; z<MapLayers; ++z) {
-						screenRectangle = CellScreenRectangle (x, y, 1);
-						if (x < 0 || y < 0 || x >= MapWidth || y >= MapHeight ||
-					    mapCells[x,y].ToDraw()==0)
-							continue;
-						spriteBatch.Draw (
-							tileSheet, 
-							screenRectangle, 
-							TileSourceRectangle (mapCells [x, y].ToDraw ()),
-							Color.White
-						);
-								
-					} 
+					if (mapCells[x,y] == null || !mapCells[x,y].HasToDraw())
+						continue;
+					spriteBatch.Draw (
+						tileSheet, 
+						CellScreenRectangle (x, y, 1), 
+						TileSourceRectangle (mapCells [x, y][OnDrugs?1:0]),
+						Color.White
+					);
 				}
 		}
 
@@ -290,8 +290,7 @@ namespace TileEngine
 				int endY = GetRowByPixelY ((int)Camera.Position.Y/2*3 + Camera.ViewPortHeight, 2);
 				for (int x = startX; x <= endX; x++)
 					for (int y = startY; y <= endY; y++) {
-					if (x < 0 || y < 0 || x >= ForegroundWidth || y >= ForegroundHeight || 
-				    GetForegroundAtCell (x,y) <=0 )
+					if (foreground[x,y] <=0 )
 						continue;
 					spriteBatch.Draw (
 						tileSheet, 
@@ -353,9 +352,6 @@ namespace TileEngine
         }
         public static void ClearMap()
         {
-            for (int x = 0; x < MapWidth; x++)
-                for (int y = 0; y < MapHeight; y++)
-                        mapCells[x, y] = new MapSquare(0, 0, 0, "", 0);
 
 			for (int x = 0; x < BackgroundWidth; x++)
 				for (int y = 0; y < BackgroundHeight; y++)
@@ -490,8 +486,14 @@ namespace TileEngine
 		}
 
 		// Drawing
-
-		static public void DrawEditMode(SpriteBatch spriteBatch, int currentLayer)//, bool drugged)
+		/// <summary>
+		/// Draws the edit mode.
+		/// </summary>
+		/// <param name="spriteBatch">Sprite batch.</param>
+		/// <param name="currentState">
+		/// Current state { background=0, clean, drugged, foreground, both, codevalue, options }
+		/// </param>
+		static public void DrawEditMode(SpriteBatch spriteBatch, int currentState)//, bool drugged)
 		{
 			int startX, endX, startY, endY;
 			startX = GetColumnByPixelX ((int)Camera.Position.X/2, 0);
@@ -515,18 +517,17 @@ namespace TileEngine
 			endY = GetRowByPixelY ((int)Camera.Position.Y + Camera.ViewPortHeight, 1);
 			for (int x = startX; x <= endX; x++)
 				for (int y = startY; y <= endY; y++) {
-					if (x < 0 || y < 0 || x >= MapWidth || y >= MapHeight ||
-					    mapCells [x, y] == MapSquare.Neutral)
+					if (x < 0 || y < 0 || x >= MapWidth || y >= MapHeight || mapCells[x,y] == null)
 						continue;
-					if(mapCells[x,y].EditMode (currentLayer -1) != 0)
+					if (mapCells [x, y].IsActiveOnEditor (currentState)) {
 						spriteBatch.Draw (
-						tileSheet, 
-						CellScreenRectangle (x, y, 1), 
-						TileSourceRectangle (mapCells [x, y].EditMode(currentLayer-1)),
-						Color.White*(
-							mapCells[x,y].ActiveOnEditor(currentLayer) ? 1.0f : 0.5f)
+							tileSheet, 
+							CellScreenRectangle (x, y, 1), 
+							TileSourceRectangle (mapCells [x, y] [currentState >= 3 ? 0 : currentState - 1]),
+							Color.White
 						);
-					if(GetSizeLayer (currentLayer) == 1) DrawEditModeItems (spriteBatch, x, y, currentLayer -1);
+					}
+					DrawEditModeItems (spriteBatch, x, y);
 				}
 			startX = GetColumnByPixelX ((int)Camera.Position.X/2*3, 2);
 			endX = GetColumnByPixelX ((int)Camera.Position.X/2*3 + Camera.ViewPortWidth, 2);
@@ -540,26 +541,27 @@ namespace TileEngine
 					tileSheet, 
 					CellScreenRectangle (x, y, 2), 
 					TileSourceRectangle (foreground[x, y]),
-					Color.White*(GetSizeLayer (currentLayer) == 2 ? 1.0f: 0.5f)
+					Color.White*(currentState >= 4 ? 1.0f: 0.5f)
 					); 
 			}
+			if (currentState > 4)
+				spriteBatch.Draw (
+					tileSheet,
+					new Rectangle (0, 0, Camera.ViewPortWidth, Camera.ViewPortHeight),
+					TileSourceRectangle (1),
+					Color.Black * 0.5f);
 		}
 
-		public static void DrawEditModeItems(SpriteBatch spriteBatch, int x, int y, int mapLayer){
-			if (x < 0 || x >= MapWidth || y < 0 || y >= MapHeight)
-				return;
-			if(!mapCells[x,y].IsPassable (mapLayer)){
- 				spriteBatch.Draw (
-					tileSheet,
-					CellScreenRectangle (x, y),
-					TileSourceRectangle (1),
-					new Color (255, 0, 0, 80),
-					0.0f,
-					Vector2.Zero,
-					SpriteEffects.None,
-					0.0f);
-			}
-			if(mapCells[x, y].CodeValue != ""){
+		public static void DrawEditModeItems(SpriteBatch spriteBatch, int x, int y){
+
+			spriteBatch.Draw (
+				tileSheet,
+				CellScreenRectangle (x, y),
+				TileSourceRectangle (1),
+				new Color (
+					mapCells[x,y].IsPassable (0) ? 0 : 255, 
+					mapCells[x,y].IsPassable (1) ? 0 : 255, 0)*0.5f);
+			if(mapCells[x, y].CodeValue.Length != 0){
 				spriteFont.DrawText (
 					spriteBatch, 
 					CellScreenPosition (x,y), 

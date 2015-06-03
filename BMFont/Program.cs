@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace BMFont
+namespace HootileriHaa
 {
     static class Program
     {
-        private static Game1 game;
-
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
         static void Main()
         {
-            game = new Game1();
-            game.Run();
+			RangeList<string, int> rist = new RangeList<string, int> ();
+			rist.Add ("hoo", 0);
+			rist.Add ("haa", 1);
+			rist.Add ("inc", 2);
+			RangeList<string, int>.RangeListIterator iterator = rist [0, 2];
+			while(iterator.Next ())
+				Console.Write (iterator.CurrentElement + "," + iterator.CurrentKey.ToString () + ";");
         }
     }
 }

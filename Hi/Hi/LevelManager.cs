@@ -64,9 +64,9 @@ namespace Hi
         {
 
 			try{
-            	TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"Content/Maps/MAP003.MAP"));
+            	TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"Content/Maps/MAP999.MAP"));
 			}catch{
-				TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"HiContent/Maps/MAP003.MAP"));
+				TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"HiContent/Maps/MAP999.MAP"));
 
 			}
             drugs.Clear();

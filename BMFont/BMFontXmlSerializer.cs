@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace BMFont
+namespace HootileriHaa
 {
 	[Serializable]
 	[XmlRoot ( "font" )]

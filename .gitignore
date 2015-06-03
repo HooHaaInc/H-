@@ -5,10 +5,13 @@ Hi/Hi/Hi.csproj
 Hi/Hi/bin
 Hi/Hi/Properties
 Hi/Hi/Content
+Hi/HiContent_old
 Hi/Hi/HiContent/Sound
+Hi/Hi/HiContent_old
 LevelEditor/LevelEditor/bin
 LevelEditor/LevelEditor/Properties
 LevelEditor/LevelEditor/LevelEditor.csproj
+LevelEditor/LevelEditorContent_old
 BMFont/*.csproj
 BMFont/bin
 BMFont/obj

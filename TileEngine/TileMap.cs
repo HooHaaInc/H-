@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using HootileriHaa;
+using HooHaaUtils;
 
 namespace TileEngine
 {

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hi.Android", "Hi.Android.csproj", "{28AEDF64-068D-45F1-B682-1349CA09F5E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hi.Android.UITests", "Hi.Android.UITests\Hi.Android.UITests.csproj", "{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Utils", "Utils\Utils.shproj", "{4AE921D7-F4F4-485E-A3F0-738625B51256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileEngine", "TileEngine\TileEngine.csproj", "{67F3FE33-4CA0-4B7F-A133-27969AFD644B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28AEDF64-068D-45F1-B682-1349CA09F5E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F3FE33-4CA0-4B7F-A133-27969AFD644B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC9D5E07-D3FD-42D0-A4C2-6DB3D0C09858}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

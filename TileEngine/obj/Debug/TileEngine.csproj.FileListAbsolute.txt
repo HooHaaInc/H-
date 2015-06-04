@@ -1,0 +1,14 @@
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.dll
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.pdb
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.dll.mdb
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.TileEngine.apk
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.TileEngine-Signed.apk
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\MonoGame.Framework.dll
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\MonoGame.Framework.xml
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\TileEngine.dll
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\TileEngine.pdb
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\android\bin\TileEngine.TileEngine.apk
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\res\values\strings.xml
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\R.cs.flag
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\uploadflags.txt
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\obj\Debug\TileEngine.csprojResolveAssemblyReference.cache

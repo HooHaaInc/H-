@@ -1,0 +1,3 @@
+C:\Users\Nancio\Documents\Projects\Hi.Android\bin\Debug\Hi.Android.dll
+C:\Users\Nancio\Documents\Projects\Hi.Android\packages\MonoGame.Framework.Android.3.4.0.459\lib\MonoAndroid\MonoGame.Framework.dll
+C:\Users\Nancio\Documents\Projects\Hi.Android\TileEngine\bin\Debug\TileEngine.dll

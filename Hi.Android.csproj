@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{28AEDF64-068D-45F1-B682-1349CA09F5E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Hi.Android</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>Hi.Android</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>packages\MonoGame.Framework.Android.3.4.0.459\lib\MonoAndroid\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MainGame.cs" />
+    <Compile Include="AnimationStrip.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="LevelManager.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Drug.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Platform.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+  </ItemGroup>
+  <Import Project="Utils\Utils.projitems" Label="Shared" Condition="Exists('Utils\Utils.projitems')" />
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="TileEngine\TileEngine.csproj">
+      <Project>{67F3FE33-4CA0-4B7F-A133-27969AFD644B}</Project>
+      <Name>TileEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\HiContent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HiContent\rect.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\rect.png" />
+    <AndroidAsset Include="Assets\HiContent\rect.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\pericles8.spritefont" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\pericles8.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont.fnt" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.png" />
+    <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP000.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP001.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP002.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP003.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP005.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP007.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP008.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP011.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP016.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP017.MAP" />
+    <AndroidAsset Include="Assets\HiContent\Maps\MAP999.MAP" />
+    <AndroidAsset Include="Assets\HiContent\sounds\dead.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\dead.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\dead.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\dead.xnb" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettingBack.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettingBack.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettingBack.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettingBack.xnb" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettinHi.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettinHi.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettinHi.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\gettinHi.xnb" />
+    <AndroidAsset Include="Assets\HiContent\sounds\High.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\High.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\High.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\High.xnb" />
+    <AndroidAsset Include="Assets\HiContent\sounds\normal.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\normal.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\normal.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\normal.xnb" />
+    <AndroidAsset Include="Assets\HiContent\sounds\titlescreen.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\sounds\titlescreen.wav" />
+    <AndroidAsset Include="Assets\HiContent\sounds\titlescreen.wma" />
+    <AndroidAsset Include="Assets\HiContent\sounds\titlescreen.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\drug.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\drug.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\drug.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Gem.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Gem.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Gem.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\greenTexture.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\greenTexture.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\greenTexture.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTiles.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTiles.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTiles.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTilesf.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTilesf.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\PlatformTilesf.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\redTexture.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\redTexture.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\redTexture.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\TitleScreen.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\TitleScreen.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\TitleScreen.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu1.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu1.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu1.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu2.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu2.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu2.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu3.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu3.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\HelpMenus\HelpMenu3.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Gem.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Gem.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Gem.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\ladrilloGris.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\ladrilloGris.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\ladrilloGris.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Thumbs.db" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Die.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Die.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Die.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Idle.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Idle.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Idle.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Run.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Run.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\Run.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\silla.gif" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\silla.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterA\silla.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Die.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Die.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Die.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Idle.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Idle.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Idle.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Run.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Run.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Run.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterB\Thumbs.db" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Die.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Die.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Die.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Idle.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Idle.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Idle.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Run.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Run.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterC\Run.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Die.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Die.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Die.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Idle.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Idle.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Idle.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Run.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Run.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\MonsterD\Run.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Celebrate.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Celebrate.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Celebrate.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Die.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Die.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Die.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Idle.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Idle.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Idle.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Jump.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Jump.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Jump.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Run.mgcontent" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Run.png" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Run.xnb" />
+    <AndroidAsset Include="Assets\HiContent\Textures\Sprites\Player\Thumbs.db" />
+  </ItemGroup>
+</Project>

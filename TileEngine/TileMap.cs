@@ -25,6 +25,8 @@ namespace TileEngine
 		static private Texture2D tileSheet;
 		static private int drugoidal = 0;
 		static public bool OnDrugs = false;
+//		private static int screenWidth;
+//		private static int screenHeight;
 		#endregion
 
 		public static void Main(string[] args){
@@ -37,7 +39,8 @@ namespace TileEngine
 			tileSheet = tileTexture;
 			background = new int[MapWidth+width/TileSize, MapHeight + height/TileSize];
 			foreground = new int[MapWidth-width/(TileSize*3), MapHeight - height/(TileSize*3)];
-
+//			screenWidth = width;
+//			screenHeight = height;
 			ClearMap ();
 
 		}

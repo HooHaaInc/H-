@@ -61,6 +61,16 @@ namespace TileEngine
 				viewPortSize.Y = value.Height;
 			}
 		}
+
+		public static int ActualWidth {
+			get;
+			set;
+		}
+
+		public static int ActualHeight {
+			get;
+			set;
+		}
 		#endregion
 
 		#region Public Methods
@@ -78,10 +88,10 @@ namespace TileEngine
 
 		public static Rectangle WorldToScreen(Rectangle worldRectangle, int z = 1){
 			return new Rectangle (
-				worldRectangle.Left - (int)position.X/2*(z+1),
-				worldRectangle.Top - (int)position.Y/2*(z+1),
-				worldRectangle.Width,
-				worldRectangle.Height);
+				(worldRectangle.Left - (int)position.X/2*(z+1))*ActualWidth/ViewPortWidth,
+				(worldRectangle.Top - (int)position.Y/2*(z+1))*ActualHeight/ViewPortHeight,
+				worldRectangle.Width*ActualWidth/ViewPortWidth,
+				worldRectangle.Height*ActualHeight/ViewPortHeight);
 		}
 
 		public static Vector2 ScreenToWorld(Vector2 screenLocation){
@@ -90,10 +100,10 @@ namespace TileEngine
 
 		public static Rectangle ScreenToWorld(Rectangle screenRectangle){
 			return new Rectangle (
-				screenRectangle.Left + (int)position.X,
-				screenRectangle.Top + (int)position.Y,
-				screenRectangle.Width,
-				screenRectangle.Height);
+				(screenRectangle.Left + (int)position.X)*ViewPortWidth/ActualWidth,
+				(screenRectangle.Top + (int)position.Y)*ViewPortHeight/ActualHeight,
+				screenRectangle.Width*ViewPortWidth/ActualWidth,
+				screenRectangle.Height*ViewPortHeight/ActualHeight);
 		}
 		#endregion
 	}

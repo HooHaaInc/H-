@@ -19,8 +19,8 @@ namespace Hi.Android
 		Song normal,high,gettingHi,gettingNormal,title,rip;
 		float sec = 0.0f;
 		Boolean entro = true; 
-		Vector2 scorePosition = new Vector2(20, 10);
 		enum GameState { TitleScreen, Playing, PlayerDead, GameOver, Help, Paused };
+		Vector2 drugsPosition;
 		GameState gameState = GameState.TitleScreen;
 		Vector2 gameOverPosition;
 		Vector2 livesPosition;
@@ -56,7 +56,8 @@ namespace Hi.Android
 			int height = TouchPanel.DisplayHeight;
 			gameOverPosition = new Vector2 (width / 3, height / 2);
 			livesPosition = new Vector2(0, 0);
-			inyeccionPosition = new Vector2 (0, 20);
+			drugsPosition = new Vector2(0, 20);
+			inyeccionPosition = new Vector2 (0, 40);
 			menuPositions [0] = new Vector2 (width / 3, height / 2);
 			menuPositions [1] = new Vector2 (width / 3, height / 2+50);
 			menuPositions [2] = new Vector2 (width / 3, height / 2+100);
@@ -79,8 +80,10 @@ namespace Hi.Android
 
 			}
 			Camera.Position = Vector2.Zero;
-			Camera.ViewPortWidth = TouchPanel.DisplayWidth;
-			Camera.ViewPortHeight = TouchPanel.DisplayHeight;
+			Camera.ViewPortWidth = 480; 
+			Camera.ActualWidth = TouchPanel.DisplayWidth;
+			Camera.ViewPortHeight = 320; 
+			Camera.ActualHeight = TouchPanel.DisplayHeight;
 			Camera.WorldRectangle = new Rectangle (0, 0, TileMap.MapWidth * TileMap.TileSize, TileMap.MapHeight * TileMap.TileSize);
 
 
@@ -310,7 +313,7 @@ namespace Hi.Android
 				player.Draw(spriteBatch);
 				LevelManager.Draw(spriteBatch);
 				TileMap.End (spriteBatch);
-				myFont.DrawText (spriteBatch, scorePosition, "Drogas: " + player.drugCount.ToString ());
+				myFont.DrawText (spriteBatch, drugsPosition, "Drogas: " + player.drugCount.ToString ());
 				myFont.DrawText (spriteBatch, inyeccionPosition, "Inyecciones: " + player.inyecciones.ToString ());
 				myFont.DrawText (spriteBatch, livesPosition, "Vidas: " + player.LivesRemaining.ToString ());
 				myFont.DrawText (spriteBatch, framesPosition, (1/(float)(gameTime.ElapsedGameTime.TotalSeconds)).ToString ());

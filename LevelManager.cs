@@ -64,7 +64,7 @@ namespace Hi.Android
         {
 
 
-			TileMap.LoadMap("HiContent/Maps/MAP999.MAP");
+			TileMap.LoadMap("HiContent/Maps/MAP001.MAP");
             drugs.Clear();
             enemies.Clear();
 			platforms.Clear ();

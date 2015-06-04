@@ -1,9 +1,15 @@
 ﻿<Properties StartupItem="Hi.Android.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TileEngine\TileMap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Drug.cs">
     <Files>
-      <File FileName="TileEngine\TileMap.cs" Line="27" Column="38" />
+      <File FileName="TileEngine\TileMap.cs" Line="17" Column="11" />
       <File FileName="TileEngine\Camera.cs" Line="1" Column="1" />
+      <File FileName="MainGame.cs" Line="20" Column="20" />
+      <File FileName="LevelManager.cs" Line="85" Column="1" />
+      <File FileName="Enemy.cs" Line="28" Column="1" />
+      <File FileName="Drug.cs" Line="28" Column="30" />
+      <File FileName="Player.cs" Line="293" Column="45" />
+      <File FileName="GameObject.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -271,26 +271,26 @@ namespace Hi.Android
         {
             int screenLocX = (int)Camera.WorldToScreen(worldLocation).X;
 
-			if (screenLocX > 2*TouchPanel.DisplayWidth/3)
+			if (screenLocX > TouchPanel.DisplayWidth/2)
             {
-				Camera.Move(new Vector2(screenLocX - 2*TouchPanel.DisplayWidth/3, 0));
+				Camera.Move(new Vector2(screenLocX - TouchPanel.DisplayWidth/2, 0));
             }
 
-			if (screenLocX < TouchPanel.DisplayWidth/3)
+			if (screenLocX < TouchPanel.DisplayWidth/2)
             {
-				Camera.Move(new Vector2(screenLocX - TouchPanel.DisplayWidth/3, 0));
+				Camera.Move(new Vector2(screenLocX - TouchPanel.DisplayWidth/2, 0));
             }
 
             int screenLocY = (int)Camera.WorldToScreen(worldLocation).Y;
 
-			if (screenLocY > 2*TouchPanel.DisplayHeight/3)
+			if (screenLocY > TouchPanel.DisplayHeight/2)
             {
-				Camera.Move(new Vector2(0, screenLocY - 2*TouchPanel.DisplayHeight/3));
+				Camera.Move(new Vector2(0, screenLocY - TouchPanel.DisplayHeight/2));
             }
 
-			if (screenLocY < TouchPanel.DisplayHeight/3/*< 200*/)
+			if (screenLocY < TouchPanel.DisplayHeight/2 /*< 200*/)
             {
-				Camera.Move(new Vector2(0, screenLocY - TouchPanel.DisplayHeight/3));
+				Camera.Move(new Vector2(0, screenLocY - TouchPanel.DisplayHeight/2));
             }
         }
 

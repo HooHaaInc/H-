@@ -58,8 +58,8 @@ namespace Hi.Android
 			livesPosition = new Vector2(0, 0);
 			inyeccionPosition = new Vector2 (0, 20);
 			menuPositions [0] = new Vector2 (width / 3, height / 2);
-			menuPositions [1] = new Vector2 (width / 3, height / 2+20);
-			menuPositions [2] = new Vector2 (width / 3, height / 2+40);
+			menuPositions [1] = new Vector2 (width / 3, height / 2+50);
+			menuPositions [2] = new Vector2 (width / 3, height / 2+100);
 			framesPosition = new Vector2 (width - 60, 0);
 			pausePosition = gameOverPosition;
 			pauseRectangle = new Rectangle (3 * width / 4, 0, width / 4, height / 3);
@@ -139,7 +139,7 @@ namespace Hi.Android
 						                       (int)menuPositions [0].X, 
 						                       (int)menuPositions [0].Y, 
 						                       TouchPanel.DisplayWidth / 3, 
-						                       20);
+						                       50);
 					if (buttonArea.Contains (touches [i].Position)) {
 						StartNewGame ();
 						gameState = GameState.Playing;
@@ -153,8 +153,8 @@ namespace Hi.Android
 						helpIndex = 0;
 						break;
 					}
-					buttonArea.X = (int)menuPositions [1].X;
-					buttonArea.Y = (int)menuPositions [1].Y;
+					buttonArea.X = (int)menuPositions [2].X;
+					buttonArea.Y = (int)menuPositions [2].Y;
 					if (buttonArea.Contains (touches [i].Position)) {
 						Exit ();
 						break;
@@ -247,7 +247,6 @@ namespace Hi.Android
 					{
 						MediaPlayer.Volume = 1.0f;
 						gameState = GameState.Playing;
-						return;
 					}
 				break;
 			case GameState.PlayerDead:

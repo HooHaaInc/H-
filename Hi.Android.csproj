@@ -94,16 +94,7 @@
     <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.mgcontent" />
     <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.png" />
     <AndroidAsset Include="Assets\HiContent\Fonts\myFont\myFont_0.xnb" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP000.MAP" />
     <AndroidAsset Include="Assets\HiContent\Maps\MAP001.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP002.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP003.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP005.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP007.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP008.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP011.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP016.MAP" />
-    <AndroidAsset Include="Assets\HiContent\Maps\MAP017.MAP" />
     <AndroidAsset Include="Assets\HiContent\Maps\MAP999.MAP" />
     <AndroidAsset Include="Assets\HiContent\sounds\dead.mgcontent" />
     <AndroidAsset Include="Assets\HiContent\sounds\dead.wav" />

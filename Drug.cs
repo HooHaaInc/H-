@@ -16,7 +16,7 @@ namespace Hi.Android
 			defaultLocation = worldLocation;
             frameWidth = 48;
             frameHeight = 48;
-			using(var stream = TitleContainer.OpenStream("HiContent/Textures/drug")) {
+			using(var stream = TitleContainer.OpenStream("HiContent/Textures/drug.png")) {
 				animations.Add ("idle",
 					new AnimationStrip (Texture2D.FromStream(graphics, stream), 48, "idle"));
 			}

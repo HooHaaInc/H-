@@ -1,8 +1,8 @@
-﻿<Properties StartupItem="Hi.Android.csproj">
+﻿<Properties StartupItem="Hi.Android.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.SelectDevice" />
   <MonoDevelop.Ide.Workbench ActiveDocument="TileEngine\TileMap.cs">
     <Files>
-      <File FileName="TileEngine\TileMap.cs" Line="29" Column="3" />
+      <File FileName="TileEngine\TileMap.cs" Line="27" Column="38" />
       <File FileName="TileEngine\Camera.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

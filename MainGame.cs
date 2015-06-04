@@ -15,7 +15,7 @@ namespace Hi.Android
 		public GraphicsDeviceManager graphics;
 		public SpriteBatch spriteBatch;
 		Player player;
-		SpriteFont pericles8;
+		//SpriteFont pericles8;
 		Song normal,high,gettingHi,gettingNormal,title,rip;
 		float sec = 0.0f;
 		Boolean entro = true; 
@@ -31,7 +31,7 @@ namespace Hi.Android
 		Rectangle pauseRectangle;
 		//Rectangle screenRect;
 		int helpIndex = 0;
-		Texture2D titleScreen;
+		//Texture2D titleScreen;
 		float deathTimer = 0.0f;
 		float deathDelay = 2.0f;
 		BitFont myFont;

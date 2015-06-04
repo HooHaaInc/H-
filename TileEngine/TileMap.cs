@@ -6,11 +6,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-<<<<<<< HEAD
 using Utils;
-=======
-using HooHaaUtils;
->>>>>>> 91c35da618812ff4f50b718954b57822c27bef5c
 
 namespace TileEngine
 {
@@ -317,37 +313,41 @@ namespace TileEngine
             fileStream.Close();
         }
 
-        public static void LoadMap(FileStream fileStream)
+        public static void LoadMap(string fileStream)
         {
             try
             {
+				var stream = TitleContainer.OpenStream(fileStream);
                 BinaryFormatter formatter = new BinaryFormatter();
-                Map aux = (Map)formatter.Deserialize(fileStream);
-                for (int x = 0; x < aux.mapCells.GetLength(0); x++)
-                {
-                    for (int y = 0; y < aux.mapCells.GetLength(1); y++)
-                    {
-                        mapCells[x, y] = aux.mapCells[x, y];
-                    }
-                }
+                Map aux = (Map)formatter.Deserialize(stream);
+//		        for (int x = 0; x < aux.mapCells.GetLength(0); x++)
+//		        {
+//		            for (int y = 0; y < aux.mapCells.GetLength(1); y++)
+//		            {
+//		                mapCells[x, y] = aux.mapCells[x, y];
+//		            }
+//		        }
+//
+//				for (int x = 0; x < aux.background.GetLength(0); x++)
+//				{
+//					for (int y = 0; y < aux.background.GetLength(1); y++)
+//					{
+//						background[x, y] = aux.background[x, y];
+//					}
+//				}
+//
+//				for (int x = 0; x < aux.foreground.GetLength(0); x++)
+//				{
+//					for (int y = 0; y < aux.foreground.GetLength(1); y++)
+//					{
+//						foreground[x, y] = aux.foreground[x, y];
+//					}
+//				}
+				mapCells = aux.mapCells;
+				background = aux.background;
+				foreground = aux.foreground;
 
-				for (int x = 0; x < aux.background.GetLength(0); x++)
-				{
-					for (int y = 0; y < aux.background.GetLength(1); y++)
-					{
-						background[x, y] = aux.background[x, y];
-					}
-				}
-
-				for (int x = 0; x < aux.foreground.GetLength(0); x++)
-				{
-					for (int y = 0; y < aux.foreground.GetLength(1); y++)
-					{
-						foreground[x, y] = aux.foreground[x, y];
-					}
-				}
-
-                fileStream.Close();
+                stream.Close();
             }
             catch
             {

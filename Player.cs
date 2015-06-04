@@ -115,7 +115,7 @@ namespace Hi.Android
             CollisionRectangle = new Rectangle(9, 1, 23, 46);
 
             drawDepth = 0.825f;
-
+			flipped = true;
             enabled = true;
             PlayAnimation("idle");
         }
@@ -128,7 +128,7 @@ namespace Hi.Android
 
             if (!Dead)
             {
-                string newAnimation = "idle";
+                string newAnimation = "run";
 
 				velocity = new Vector2(moveScale, velocity.Y);
 				bool alreadyDrugged = false;
@@ -271,26 +271,26 @@ namespace Hi.Android
         {
             int screenLocX = (int)Camera.WorldToScreen(worldLocation).X;
 
-            if (screenLocX > 410)
+			if (screenLocX > 2*TouchPanel.DisplayWidth/3)
             {
-                Camera.Move(new Vector2(screenLocX - 410, 0));
+				Camera.Move(new Vector2(screenLocX - 2*TouchPanel.DisplayWidth/3, 0));
             }
 
-            if (screenLocX < 390)
+			if (screenLocX < TouchPanel.DisplayWidth/3)
             {
-                Camera.Move(new Vector2(screenLocX - 390, 0));
+				Camera.Move(new Vector2(screenLocX - TouchPanel.DisplayWidth/3, 0));
             }
 
             int screenLocY = (int)Camera.WorldToScreen(worldLocation).Y;
 
-            if (screenLocY > 250)
+			if (screenLocY > 2*TouchPanel.DisplayHeight/3)
             {
-                Camera.Move(new Vector2(0, screenLocY - 250));
+				Camera.Move(new Vector2(0, screenLocY - 2*TouchPanel.DisplayHeight/3));
             }
 
-            if (screenLocY < 230/*< 200*/)
+			if (screenLocY < TouchPanel.DisplayHeight/3/*< 200*/)
             {
-                Camera.Move(new Vector2(0, screenLocY - 230));
+				Camera.Move(new Vector2(0, screenLocY - TouchPanel.DisplayHeight/3));
             }
         }
 

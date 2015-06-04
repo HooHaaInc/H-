@@ -63,12 +63,8 @@ namespace Hi.Android
         public static void LoadLevel(int levelNumber)
         {
 
-			try{
-            	TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"Content/Maps/MAP999.MAP"));
-			}catch{
-				TileMap.LoadMap((System.IO.FileStream)TitleContainer.OpenStream(@"HiContent/Maps/MAP999.MAP"));
 
-			}
+			TileMap.LoadMap("HiContent/Maps/MAP999.MAP");
             drugs.Clear();
             enemies.Clear();
 			platforms.Clear ();

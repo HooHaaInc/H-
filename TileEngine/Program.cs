@@ -13,7 +13,7 @@ using MonoTouch.UIKit;
 #endif
 #endregion
 
-namespace HooHaaUtils
+namespace TileEngine
 {
 	#if __IOS__
 	[Register("AppDelegate")]

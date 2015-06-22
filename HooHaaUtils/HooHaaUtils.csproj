@@ -3,13 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ECB8D448-124B-4AC3-AD1F-D78F6A708B99}</ProjectGuid>
-    <ProjectTypeGuids>{9B831FEF-F496-498F-9FE8-180DA5CB4258};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{36E3A43F-5249-4DC9-A1FA-5B17E042226B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>HooHaaUtils</RootNamespace>
     <AssemblyName>HooHaaUtils</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,7 +15,6 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
@@ -26,7 +23,6 @@
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
@@ -35,30 +31,21 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="OpenTK">
-      <Package>opentk</Package>
-    </Reference>
-    <Reference Include="MonoGame.Framework.Linux">
-      <Package>monogame</Package>
-    </Reference>
-    <Reference Include="Lidgren.Network">
-      <Package>monogame</Package>
-    </Reference>
-    <Reference Include="Tao.Sdl">
-      <Package>tao-sdl</Package>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.3.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Game1.cs" />
     <Compile Include="BitFont.cs" />
     <Compile Include="BMFontXmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
+    <None Include="Content\Content.mgcb" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

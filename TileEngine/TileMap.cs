@@ -100,7 +100,7 @@ namespace TileEngine
 			}
 		}
 
-		public MapCell GetCellByPixel(Vector2 pixelLocation){ 
+		public static MapCell GetCellByPixel(Vector2 pixelLocation){ 
 			return new MapCell (
 				TileMap.GetColumnByPixelX ((int)pixelLocation.X),
 				TileMap.GetRowByPixelY ((int)pixelLocation.Y));

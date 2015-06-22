@@ -6,10 +6,11 @@ namespace TileEngine
 	public class Map
 	{
 		public MapSquare[,] mapCells;
-		public int[,] background;
+		public int background;
 		public int[,] foreground;
+		public int version;
 
-		public Map (MapSquare[,] mapC, int[,] backG, int[,] foreG)
+		public Map (int backG, MapSquare[,] mapC, int[,] foreG, int version)
 		{
 			mapCells = mapC;
 			background = backG;

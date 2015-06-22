@@ -41,7 +41,7 @@ namespace LevelEditor
 
 		private Rectangle CursorRectangle{
 			get{ 
-				int dim = TileMap.LayerTileSize (TileMap.GetSizeLayer((int)editorState));
+				int dim = TileMap.TileSize;
 				return new Rectangle (
 					(int)(dim*cursor.X), 
 					(int)(dim*cursor.Y),
@@ -52,7 +52,7 @@ namespace LevelEditor
 
 		private Vector2 CursorPosition{
 			get{ 
-				int dim = TileMap.LayerTileSize (TileMap.GetSizeLayer((int)editorState));
+				int dim = TileMap.TileSize;
 				return new Vector2 (
 					dim*cursor.X, 
 					dim*cursor.Y); 
@@ -89,7 +89,9 @@ namespace LevelEditor
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-			TileMap.Initialize (Content.Load <Texture2D> ("Textures/PlatformTiles"), 800, 480);
+			Texture2D[] backgrounds = new Texture2D[1];
+			backgrounds [0] = Content.Load<Texture2D> ("Textures/city");
+			TileMap.Initialize (backgrounds, Content.Load <Texture2D> ("Textures/PlatformTiles"));
 			font = new BitFont (Content);
 			TileMap.spriteFont = font;
 			rect = Content.Load <Texture2D> ("rect");
@@ -121,41 +123,40 @@ namespace LevelEditor
 			}
 			switch(editorState){
 			case EditorState.Background:
-				if (keyState.IsKeyDown (Keys.Up) && lastState.IsKeyUp (Keys.Up)) {
-					prevground = TileMap.GetBackgroundAtCell (cursor);//.GetMapSquareAtPixel (new Vector2 (cursor.X, cursor.Y));
-					if (cursor.Y > 0)
-						--cursor.Y;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
-						TileMap.SetBackgroundAtCell (cursor, prevground);
-				} else if (keyState.IsKeyDown (Keys.Down) && lastState.IsKeyUp (Keys.Down)) {
-					prevground = TileMap.GetBackgroundAtCell (cursor);
-					if (cursor.Y < TileMap.BackgroundHeight - 1)
-						++cursor.Y;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
-						TileMap.SetBackgroundAtCell (cursor, prevground);
-				} else if (keyState.IsKeyDown (Keys.Left) && lastState.IsKeyUp (Keys.Left)) {
-					prevground = TileMap.GetBackgroundAtCell (cursor);
-					if (cursor.X > 0)
-						--cursor.X;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
-						TileMap.SetBackgroundAtCell (cursor, prevground);
-				} else if (keyState.IsKeyDown (Keys.Right) && lastState.IsKeyUp (Keys.Right)) {
-					prevground = TileMap.GetBackgroundAtCell (cursor);
-					if (cursor.X < TileMap.BackgroundWidth - 1)
-						++cursor.X;
-					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
-						TileMap.SetBackgroundAtCell (cursor, prevground);
-				} else if (keyState.IsKeyDown (Keys.PageUp) && lastState.IsKeyUp (Keys.PageUp)) {
-					TileMap.IncrementBackgroundAtCell (cursor);
+//				if (keyState.IsKeyDown (Keys.Up) && lastState.IsKeyUp (Keys.Up)) {
+//					prevground = TileMap.GetBackgroundAtCell (cursor);//.GetMapSquareAtPixel (new Vector2 (cursor.X, cursor.Y));
+//					if (cursor.Y > 0)
+//						--cursor.Y;
+//					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+//						TileMap.SetBackgroundAtCell (cursor, prevground);
+//				} else if (keyState.IsKeyDown (Keys.Down) && lastState.IsKeyUp (Keys.Down)) {
+//					prevground = TileMap.GetBackgroundAtCell (cursor);
+//					if (cursor.Y < TileMap.BackgroundHeight - 1)
+//						++cursor.Y;
+//					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+//						TileMap.SetBackgroundAtCell (cursor, prevground);
+//				} else if (keyState.IsKeyDown (Keys.Left) && lastState.IsKeyUp (Keys.Left)) {
+//					prevground = TileMap.GetBackgroundAtCell (cursor);
+//					if (cursor.X > 0)
+//						--cursor.X;
+//					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+//						TileMap.SetBackgroundAtCell (cursor, prevground);
+//				} else if (keyState.IsKeyDown (Keys.Right) && lastState.IsKeyUp (Keys.Right)) {
+//					prevground = TileMap.GetBackgroundAtCell (cursor);
+//					if (cursor.X < TileMap.BackgroundWidth - 1)
+//						++cursor.X;
+//					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
+//						TileMap.SetBackgroundAtCell (cursor, prevground);
+//				} else 
+				if (keyState.IsKeyDown (Keys.PageUp) && lastState.IsKeyUp (Keys.PageUp)) {
+					++TileMap.BackgroundIndex;
 				} else if (keyState.IsKeyDown (Keys.PageDown) && lastState.IsKeyUp (Keys.PageDown)) {
-					TileMap.DecrementBackgroundAtCell (cursor);
-				} else if (keyState.IsKeyDown (Keys.Delete) && lastState.IsKeyUp (Keys.Delete)) {
-					TileMap.SetBackgroundAtCell (cursor, TileMap.defaultBackground);
+					--TileMap.BackgroundIndex;
 				} else if (keyState.IsKeyDown (Keys.C) && lastState.IsKeyUp (Keys.C)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition, 0, 2);
+					//cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition, 0, 2);
 					editorState = EditorState.Foreground;
 				} else if (keyState.IsKeyDown (Keys.X) && lastState.IsKeyUp (Keys.X)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition, 0, 1);
+					//cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition, 0, 1);
 					editorState = EditorState.Clean;
 				} else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
@@ -171,7 +172,7 @@ namespace LevelEditor
 						TileMap.SetForegroundAtCell (cursor, prevground);
 				} else if (keyState.IsKeyDown (Keys.Down) && lastState.IsKeyUp (Keys.Down)) {
 					prevground = TileMap.GetForegroundAtCell (cursor);
-					if (cursor.Y < TileMap.ForegroundHeight - 1)
+					if (cursor.Y < TileMap.MapHeight - 1)
 						++cursor.Y;
 					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
 						TileMap.SetForegroundAtCell (cursor, prevground);
@@ -183,7 +184,7 @@ namespace LevelEditor
 						TileMap.SetForegroundAtCell (cursor, prevground);
 				} else if (keyState.IsKeyDown (Keys.Right) && lastState.IsKeyUp (Keys.Right)) {
 					prevground = TileMap.GetForegroundAtCell (cursor);
-					if (cursor.X < TileMap.ForegroundWidth - 1)
+					if (cursor.X < TileMap.MapWidth - 1)
 						++cursor.X;
 					if (keyState.IsKeyDown (Keys.LeftControl) || keyState.IsKeyDown (Keys.RightControl))
 						TileMap.SetForegroundAtCell (cursor, prevground);
@@ -194,11 +195,9 @@ namespace LevelEditor
 				} else if (keyState.IsKeyDown (Keys.Delete) && lastState.IsKeyUp (Keys.Delete)) {
 					TileMap.SetForegroundAtCell (cursor, 0);
 				} else if (keyState.IsKeyDown (Keys.Z) && lastState.IsKeyUp (Keys.Z)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,2, 0);
 					editorState = EditorState.Background;
 
 				} else if (keyState.IsKeyDown (Keys.X) && lastState.IsKeyUp (Keys.X)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,2, 1);
 					editorState = EditorState.Clean;
 				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
@@ -252,10 +251,8 @@ namespace LevelEditor
 				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
 				}else if (keyState.IsKeyDown (Keys.Z) && lastState.IsKeyUp (Keys.Z)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 0);
 					editorState = EditorState.Background;
 				}else if (keyState.IsKeyDown (Keys.C) && lastState.IsKeyUp (Keys.C)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 2);
 					editorState = EditorState.Foreground;
 				}else if (keyState.IsKeyDown (Keys.A) && lastState.IsKeyUp (Keys.A)) {
 					editorState = EditorState.Both;
@@ -317,10 +314,8 @@ namespace LevelEditor
 				}else if (keyState.IsKeyDown (Keys.Escape) && lastState.IsKeyUp (Keys.Escape)) {
 					editorState = EditorState.Options;
 				}else if (keyState.IsKeyDown (Keys.Z) && lastState.IsKeyUp (Keys.Z)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 0);
 					editorState = EditorState.Background;
 				}else if (keyState.IsKeyDown (Keys.C) && lastState.IsKeyUp (Keys.C)) {
-					cursor = TileMap.GetCellByPixelBetweenLayers (CursorPosition,1, 2);
 					editorState = EditorState.Foreground;
 				}else if (keyState.IsKeyDown (Keys.S) && lastState.IsKeyUp (Keys.S)) {
 					editorState = EditorState.Clean;
@@ -416,7 +411,7 @@ namespace LevelEditor
 				editorState == EditorState.Foreground) {
 				spriteBatch.Draw (
 					rect,
-					Camera.WorldToScreen (CursorRectangle, TileMap.GetSizeLayer((int)editorState)),//cursor,
+					Camera.WorldToScreen (CursorRectangle, TileMap.TileSize),//cursor,
 					Color.White* 0.4f);
 				font.DrawText (spriteBatch, 600, 0, layer [(int)editorState]);
 				//font.DrawText (spriteBatch, new Vector2 (0, 0), "Camera.Position: " + Camera.Position.ToString ());
@@ -445,7 +440,7 @@ namespace LevelEditor
 
 		private void repositionCamera()
 		{
-			Vector2 screenLoc= Camera.WorldToScreen(CursorPosition, TileMap.GetSizeLayer((int)editorState));
+			Vector2 screenLoc= Camera.WorldToScreen(CursorPosition, TileMap.TileSize);
 
 			if (screenLoc.X > 480)
 			{

@@ -51,14 +51,17 @@ namespace Hi
 		public static bool OnDrugs = false;
 		#endregion
 
-
+		#region Constructor
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
             Content.RootDirectory = "HiContent";
         }
+		#endregion
 
+
+		#region Overrided Methods
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -266,9 +269,6 @@ namespace Hi
 				{
 					MediaPlayer.Volume = 1.0f;
 					gameState = GameState.Playing;
-					lastState = keyState;
-					base.Update(gameTime);
-					return;
 				}
 				break;
 			case GameState.PlayerDead:
@@ -357,6 +357,7 @@ namespace Hi
             spriteBatch.End();
             base.Draw(gameTime);
         }
+		#endregion
 
         #region Helper Methods
         private void StartNewGame()

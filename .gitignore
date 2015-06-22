@@ -12,10 +12,10 @@ LevelEditor/LevelEditor/bin
 LevelEditor/LevelEditor/Properties
 LevelEditor/LevelEditor/LevelEditor.csproj
 LevelEditor/LevelEditorContent_old
-BMFont/*.csproj
-BMFont/bin
-BMFont/obj
-BMFont/Properties
+HooHaaUtils/*.csproj
+HooHaaUtils/bin
+HooHaaUtils/obj
+HooHaaUtils/Properties
 TileEngine/bin
 TileEngine/Properties
 TileEngine/Icon.png
